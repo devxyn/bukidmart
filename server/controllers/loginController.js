@@ -1,20 +1,30 @@
-const loginController = (req, res) => {
+import User from '../models/User.js';
+
+const loginController = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = { email: 'test@test.com', password: '123123123' };
-
   try {
-    if (user.email !== email) {
-      res.status(500).json({ message: 'Invalid credentials' });
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        message: 'Invalid email!',
+      });
     }
 
-    if (user.password !== password) {
-      res.status(500).json({ message: 'Incorrect password.' });
-    }
+    const passwordMatch = password === user.password;
 
-    res.status(200).json({ message: 'Login successfully' });
+    if (!passwordMatch) {
+      return res.status(400).json({
+        message: 'Incorrect password!',
+      });
+    }
+    return res.status(200).json({
+      message: 'Login successful!',
+      data: user,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong!' });
+    res.status(500).json({ message: 'Something went wrong!', error: error.message });
   }
 };
 
