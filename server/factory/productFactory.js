@@ -2,8 +2,9 @@ const products = [];
 
 class ProductFactory {
   add(name) {
-    products.push({ id: products.length + 1, name });
-    return products;
+    const product = { id: products.length + 1, name };
+    products.push(product);
+    return product;
   }
 
   getAllProducts() {
