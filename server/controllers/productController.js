@@ -1,14 +1,16 @@
-import ProductFactory from '../factory/productFactory.js';
-const productFactory = new ProductFactory();
+import Product from '../models/Product.js';
 
-export const addProduct = (req, res) => {
-  const { name } = req.body;
+export const addProduct = async (req, res) => {
+  const { name, description, price, quantity, imageUrl, category } = req.body;
   try {
-    if (!name) {
-      res.status(500).json({ message: 'Invalid product!' });
-      return;
-    }
-    const product = productFactory.add(name);
+    const product = await Product.create({
+      name,
+      description,
+      price,
+      quantity,
+      imageUrl,
+      category,
+    });
 
     res.status(201).json({ message: 'Product created successfully', product });
   } catch (error) {
@@ -16,20 +18,20 @@ export const addProduct = (req, res) => {
   }
 };
 
-export const getAllProducts = (req, res) => {
+export const getAllProducts = async (req, res) => {
   try {
-    const allProducts = productFactory.getAllProducts();
+    const allProducts = await Product.find({});
     res.status(200).json({ products: allProducts });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error!' });
   }
 };
 
-export const getProduct = (req, res) => {
+export const getProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const product = productFactory.getProduct(id);
+    const product = await Product.findById(id);
     res.status(200).json({ product });
   } catch (error) {
     res.status(500).json({ message: 'Invalid product!' });
