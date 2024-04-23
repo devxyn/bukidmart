@@ -2,7 +2,7 @@ import express from 'express';
 import process from 'node:process';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import 'dotenv/config';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
@@ -11,7 +11,9 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 try {
-  await mongoose.connect('mongodb://localhost:27017', { dbName: 'BukidMart' });
+  await mongoose.connect(`mongodb+srv://admin:${process.env.DB_PASSWORD}@cluster0.lpsgwhq.mongodb.net/`, {
+    dbName: process.env.DB_NAME,
+  });
   console.log('Connected to database!');
 } catch (e) {
   app.use((_, res) => {
