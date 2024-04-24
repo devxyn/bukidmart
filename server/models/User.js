@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  firstName: { type: String },
-  lastName: { type: String },
-  contactNumber: { type: String, default: '' },
+  email: { type: String, required: true, unique: true, trim: true },
+  password: { type: String, required: true, trim: true },
+  firstName: { type: String, trim: true },
+  lastName: { type: String, trim: true },
+  contactNumber: { type: String, trim: true, default: '' },
   address: {
     addressLine: { type: String, default: '' },
     city: { type: String, default: '' },
