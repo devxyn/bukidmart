@@ -1,14 +1,29 @@
+import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSuccess, setIsSucceess] = useState(false);
 
-  const handleLogin = (e) => {
+  const url = 'http://localhost:4000/api/auth/login';
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
+    try {
+      const result = await axios.post(url, { email, password });
+
+      if (result.status === 200) {
+        setIsSucceess(true);
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -17,8 +32,8 @@ const Login = () => {
         onSubmit={handleLogin}
         className='w-[90%] md:w-[35%] md:border md:border-gray-300 md:p-10 md:rounded-lg flex flex-col items-center gap-4'>
         <h3 className='text-lg font-bold'>Returning customer</h3>
-        <div className='w-full'>
-          <p className='hidden'>Invalid email or password!</p>
+        <div className={`${isSuccess ? '' : 'hidden'} w-full bg-lime-200 px-4 py-2 rounded-md`}>
+          {isSuccess && <p className='text-xs text-green-700'>Logged in successfully!</p>}
         </div>
         <div className='w-full'>
           <input
@@ -28,6 +43,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            disabled={isSuccess}
           />
         </div>
         <div className='w-full'>
@@ -38,6 +54,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            disabled={isSuccess}
           />
         </div>
         <div className='w-full flex flex-row justify-between'>
@@ -50,7 +67,10 @@ const Login = () => {
           </a>
         </div>
         <div className='w-full flex flex-col gap-4'>
-          <button className='border bg-lime-600 p-4 rounded-lg text-sm font-bold text-white' type='submit'>
+          <button
+            className='border bg-lime-600 p-4 rounded-lg text-sm font-bold text-white'
+            type='submit'
+            disabled={isSuccess}>
             Sign in
           </button>
           <Link
