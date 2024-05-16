@@ -2,7 +2,7 @@ import banner2 from '../assets/banner 2.png';
 
 const StatementSection = () => {
   return (
-    <div className='h-[80vh] md:h-screen bg-backdrop flex justify-center items-center px-5 md:px-10 relative'>
+    <section className='h-[80vh] md:h-screen bg-backdrop flex justify-center items-center px-5 md:px-10 relative'>
       <img
         className='w-full md:w-[50%] h-full md:h-auto absolute top-0 left-0 object-cover object-center z-[1] md:static md:z-auto'
         src={banner2}
@@ -21,7 +21,7 @@ const StatementSection = () => {
           technology, igniting a wave of prosperity across our communities.
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 
