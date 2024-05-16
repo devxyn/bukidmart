@@ -53,9 +53,9 @@ const Navbar = () => {
             <Link className='text-white text-base font-semibold'>PRODUCTS</Link>
             <Link className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>SHOP NOW</Link>
           </div>
-          <div className='flex gap-2'>
-            <HiOutlineUserCircle size={24} className='stroke-white cursor-pointer' />
-            <HiOutlineShoppingBag size={24} className='stroke-white cursor-pointer' />
+          <div className='flex items-center gap-2'>
+            <HiOutlineUserCircle size={32} className='stroke-white cursor-pointer' />
+            <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
           </div>
         </div>
       </div>
