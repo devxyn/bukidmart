@@ -9,7 +9,9 @@ const Navbar = () => {
         <div className='w-full flex justify-between px-5 items-center'>
           <div className='flex gap-1'>
             <HiBars3 size={32} className='fill-white' />
-            <h1 className='text-white text-2xl'>BukidMart</h1>
+            <Link to='/' className='text-white text-2xl'>
+              BukidMart
+            </Link>
           </div>
           <div className='flex gap-1'>
             <HiOutlineUserCircle size={32} className='stroke-white' />
@@ -29,7 +31,9 @@ const Navbar = () => {
       {/* {Desktop Nav bar} */}
       <div className='hidden md:flex h-full px-10 items-center justify-between'>
         <div className='flex items-center gap-10'>
-          <h1 className='text-4xl font-bold text-white'>BukidMart</h1>
+          <Link to='/' className='text-4xl font-bold text-white'>
+            BukidMart
+          </Link>
           <div className='relative '>
             <input
               className='px-5 py-3 w-80 relative bg-backdrop placeholder-placeholder rounded-3xl text-xs'
