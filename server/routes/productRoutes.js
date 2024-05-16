@@ -7,4 +7,4 @@ router.post('/add', addProduct);
 router.get('/', getAllProducts);
 router.get('/:id', getProduct);
 
-export default router;
+export { router as productRoutes };
