@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSuccess, setIsSucceess] = useState(false);
+  const [message, setMessage] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [_, setCookies] = useCookies('access_token');
 
   const url = 'http://localhost:4000/api/auth/login';
   const navigate = useNavigate();
@@ -13,10 +17,15 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post(url, { email, password });
+      const response = await axios.post(url, { email, password });
+      console.log(response);
 
-      if (result.status === 200) {
+      if (response.status === 200) {
+        setCookies('access_token', response.data.token);
+        window.localStorage.setItem('userID', response.data.userID);
+
         setIsSucceess(true);
+        setMessage(response.data.message);
         setTimeout(() => {
           navigate('/');
         }, 3000);
@@ -33,7 +42,7 @@ const Login = () => {
         className='w-[90%] md:w-[35%] md:border md:border-gray-300 md:p-10 md:rounded-lg flex flex-col items-center gap-4'>
         <h3 className='text-lg font-bold'>Returning customer</h3>
         <div className={`${isSuccess ? '' : 'hidden'} w-full bg-lime-200 px-4 py-2 rounded-md`}>
-          {isSuccess && <p className='text-xs text-green-700'>Logged in successfully!</p>}
+          {isSuccess && <p className='text-xs text-green-700'>{message}</p>}
         </div>
         <div className='w-full'>
           <input
