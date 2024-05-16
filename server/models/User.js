@@ -5,8 +5,8 @@ const { Schema, model } = mongoose;
 const userSchema = new Schema({
   email: { type: String, required: true, unique: true, trim: true },
   password: { type: String, required: true, trim: true },
-  firstName: { type: String, trim: true },
-  lastName: { type: String, trim: true },
+  firstName: { type: String, trim: true, default: '' },
+  lastName: { type: String, trim: true, default: '' },
   contactNumber: { type: String, trim: true, default: '' },
   address: {
     addressLine: { type: String, default: '' },
@@ -16,11 +16,10 @@ const userSchema = new Schema({
   },
   cart: [
     {
-      product: { type: Schema.Types.ObjectId, ref: 'Product' },
+      product: { type: Schema.Types.ObjectId, ref: 'products' },
       quantity: { type: Number },
     },
   ],
-  orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
   isAdmin: { type: Boolean, default: false },
 });
 
