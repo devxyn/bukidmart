@@ -2,7 +2,7 @@ import banner from '../assets/banner.png';
 
 const Banner = () => {
   return (
-    <div className='bg-backdrop h-[70vh] md:h-[100vh] px-5 md:px-20 pt-[100px] md:pt-[70px] relative flex items-center justify-center overflow-hidden'>
+    <div className='bg-backdrop h-[80vh] md:h-screen px-5 md:px-20 pt-[100px] md:pt-[70px] relative flex items-center justify-center overflow-hidden'>
       <div className='text-left z-10'>
         <h1 className='text-4xl md:text-5xl font-semibold tracking-wide md:tracking-widest leading-tight mb-10'>
           <span className='text-secondary font-bold'>Farm-fresh</span> goodness delivered to your doorstep
