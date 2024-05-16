@@ -2,9 +2,9 @@ import ProductCard from './ProductCard';
 
 const FeaturedProduct = () => {
   return (
-    <section className='h-[80%] md:h-screen flex flex-col items-center py-10 md:py-16 px-4'>
-      <h2 className='text-2xl md:text-4xl font-bold tracking-widest'>FEATURED PRODUCTS</h2>
-      <div className='flex w-full md:justify-center overflow-x-scroll md:overflow-x-auto gap-5 md:gap-10 my-10 md:my-16'>
+    <section className='h-[80%] md:h-screen flex flex-col items-center justify-center gap-10 md:gap-14 px-5 py-10'>
+      <h2 className='text-2xl md:text-5xl tracking-widest'>FEATURED PRODUCTS</h2>
+      <div className='flex w-full md:justify-center overflow-x-scroll md:overflow-x-auto gap-5 md:gap-10'>
         <ProductCard />
         <ProductCard />
         <ProductCard />
