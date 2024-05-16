@@ -3,9 +3,9 @@ import process from 'node:process';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import 'dotenv/config';
-import authRoutes from './routes/authRoutes.js';
-import productRoutes from './routes/productRoutes.js';
+import 'dotenv/config.js';
+import { authRoutes } from './routes/authRoutes.js';
+import { productRoutes } from './routes/productRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;

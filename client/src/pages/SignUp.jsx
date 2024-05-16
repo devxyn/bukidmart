@@ -6,6 +6,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSuccess, setIsSuceess] = useState(false);
+  const [message, setMessage] = useState('');
 
   const url = 'http://localhost:4000/api/auth/signup';
   const navigate = useNavigate();
@@ -16,11 +17,13 @@ const SignUp = () => {
       const result = await axios.post(url, { email, password });
       if (result.status === 201) {
         setIsSuceess(true);
+        setMessage(result.data.message);
 
         setTimeout(() => {
           navigate('/login');
-        }, 2000);
+        }, 2500);
       }
+      console.log(result);
     } catch (error) {
       console.error(error.message);
     }
@@ -33,7 +36,7 @@ const SignUp = () => {
         className='w-[90%] md:w-[35%] md:border md:border-gray-300 md:p-10 md:rounded-lg flex flex-col items-center gap-4'>
         <h3 className='text-lg font-bold'>Create an account</h3>
         <div className={`${isSuccess ? '' : 'hidden'} w-full bg-lime-200 px-4 py-2 rounded-md`}>
-          {isSuccess && <p className='text-xs text-green-700'>Signed up successfully!</p>}
+          {isSuccess && <p className='text-xs text-green-700'>{message}</p>}
         </div>
         <div className='w-full'>
           <input

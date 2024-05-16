@@ -11,6 +11,7 @@ export default {
         accent: '#E8B75C',
         backdrop: '#F3FCF7',
         shade: '#F8FBF5',
+        placeholder: '#999999',
       },
     },
   },
