@@ -10,7 +10,7 @@ export default {
         secondary: '#43B130',
         accent: '#E8B75C',
         backdrop: '#F3FCF7',
-        shade: '#D9D9D9',
+        shade: '#F8FBF5',
         placeholder: '#999999',
       },
     },
