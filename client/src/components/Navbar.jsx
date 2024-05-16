@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className='sticky h-[100px] md:h-[70px] w-full bg-primary shadow-md'>
+    <nav className='fixed z-50 h-[100px] md:h-[70px] w-full bg-primary shadow-md'>
       {/* {Mobile Nav bar} */}
       <div className='h-full w-full flex flex-col gap-2 items-center justify-center md:hidden'>
         <div className='w-full flex justify-between px-5 items-center'>
