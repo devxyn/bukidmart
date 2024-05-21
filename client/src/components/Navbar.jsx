@@ -1,20 +1,19 @@
-import { HiBars3, HiOutlineMagnifyingGlass, HiOutlineShoppingBag, HiOutlineUserCircle } from 'react-icons/hi2';
+import { HiBars3, HiOutlineMagnifyingGlass, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className='sticky h-[100px] md:h-[70px] w-full bg-primary shadow-md'>
+    <nav className='fixed z-50 h-[100px] md:h-[80px] w-full bg-primary shadow-md'>
       {/* {Mobile Nav bar} */}
       <div className='h-full w-full flex flex-col gap-2 items-center justify-center md:hidden'>
         <div className='w-full flex justify-between px-5 items-center'>
           <div className='flex gap-1'>
             <HiBars3 size={32} className='fill-white' />
-            <h1 className='text-white text-2xl'>BukidMart</h1>
+            <Link to='/' className='text-white text-2xl'>
+              BukidMart
+            </Link>
           </div>
-          <div className='flex gap-1'>
-            <HiOutlineUserCircle size={32} className='stroke-white' />
-            <HiOutlineShoppingBag size={32} className='stroke-white' />
-          </div>
+          <HiOutlineShoppingBag size={32} className='stroke-white' />
         </div>
         <div className='relative w-[90%]'>
           <input
@@ -29,7 +28,9 @@ const Navbar = () => {
       {/* {Desktop Nav bar} */}
       <div className='hidden md:flex h-full px-10 items-center justify-between'>
         <div className='flex items-center gap-10'>
-          <h1 className='text-4xl font-bold text-white'>BukidMart</h1>
+          <Link to='/' className='text-4xl font-bold text-white'>
+            BukidMart
+          </Link>
           <div className='relative '>
             <input
               className='px-5 py-3 w-80 relative bg-backdrop placeholder-placeholder rounded-3xl text-xs'
@@ -49,10 +50,7 @@ const Navbar = () => {
             <Link className='text-white text-base font-semibold'>PRODUCTS</Link>
             <Link className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>SHOP NOW</Link>
           </div>
-          <div className='flex gap-2'>
-            <HiOutlineUserCircle size={24} className='stroke-white cursor-pointer' />
-            <HiOutlineShoppingBag size={24} className='stroke-white cursor-pointer' />
-          </div>
+          <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
         </div>
       </div>
     </nav>

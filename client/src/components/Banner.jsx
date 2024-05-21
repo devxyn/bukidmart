@@ -2,7 +2,7 @@ import banner from '../assets/banner.png';
 
 const Banner = () => {
   return (
-    <div className='bg-backdrop h-[50vh] md:h-[90vh] px-5 md:px-20 relative flex items-center justify-center'>
+    <div className='bg-backdrop h-[80vh] md:h-screen px-5 md:px-20 pt-[100px] md:pt-[70px] relative flex items-center justify-center overflow-hidden'>
       <div className='text-left z-10'>
         <h1 className='text-4xl md:text-5xl font-semibold tracking-wide md:tracking-widest leading-tight mb-10'>
           <span className='text-secondary font-bold'>Farm-fresh</span> goodness delivered to your doorstep
@@ -21,7 +21,7 @@ const Banner = () => {
       <img
         src={banner}
         alt='overlay-banner'
-        className='w-full md:w-[50%] h-full md:h-auto absolute top-0 left-0 object-cover z-[1] md:static md:z-auto'
+        className='w-full md:w-[50%] h-full md:h-auto absolute top-[100px] left-0 object-cover object-center z-[1] md:static md:z-auto'
       />
     </div>
   );
