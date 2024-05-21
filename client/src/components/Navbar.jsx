@@ -13,7 +13,9 @@ const Navbar = () => {
               BukidMart
             </Link>
           </div>
-          <HiOutlineShoppingBag size={32} className='stroke-white' />
+          <Link to='/cart'>
+            <HiOutlineShoppingBag size={32} className='stroke-white' />
+          </Link>
         </div>
         <div className='relative w-[90%]'>
           <input
@@ -50,7 +52,9 @@ const Navbar = () => {
             <Link className='text-white text-base font-semibold'>PRODUCTS</Link>
             <Link className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>SHOP NOW</Link>
           </div>
-          <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
+          <Link to='/cart'>
+            <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
+          </Link>
         </div>
       </div>
     </nav>
