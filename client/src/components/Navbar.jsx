@@ -1,4 +1,4 @@
-import { HiBars3, HiOutlineMagnifyingGlass, HiOutlineShoppingBag, HiOutlineUserCircle } from 'react-icons/hi2';
+import { HiBars3, HiOutlineMagnifyingGlass, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -13,10 +13,7 @@ const Navbar = () => {
               BukidMart
             </Link>
           </div>
-          <div className='flex gap-1'>
-            <HiOutlineUserCircle size={32} className='stroke-white' />
-            <HiOutlineShoppingBag size={32} className='stroke-white' />
-          </div>
+          <HiOutlineShoppingBag size={32} className='stroke-white' />
         </div>
         <div className='relative w-[90%]'>
           <input
@@ -53,10 +50,7 @@ const Navbar = () => {
             <Link className='text-white text-base font-semibold'>PRODUCTS</Link>
             <Link className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>SHOP NOW</Link>
           </div>
-          <div className='flex items-center gap-2'>
-            <HiOutlineUserCircle size={32} className='stroke-white cursor-pointer' />
-            <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
-          </div>
+          <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
         </div>
       </div>
     </nav>
