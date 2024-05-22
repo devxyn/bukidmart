@@ -11,7 +11,7 @@ const TestimonialCards = () => {
         better!"
       </p>
       <div className='flex w-full gap-4 items-center'>
-        <img className='w-[10%]  rounded-full' src={shiela} alt='shiela' />
+        <img className='w-[10%] lg:w-1/6 rounded-full' src={shiela} alt='shiela' />
         <p className='text-2xl italic font-light'>- Shiela P.</p>
       </div>
     </div>
