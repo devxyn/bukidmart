@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import banner from '../assets/banner.png';
 
 const Banner = () => {
@@ -8,9 +9,11 @@ const Banner = () => {
           <span className='text-secondary font-bold'>Farm-fresh</span> goodness delivered to your doorstep
         </h1>
         <div className='flex justify-center lg:justify-start gap-4'>
-          <button className='bg-accent text-white text-base lg:text-2xl font-semibold px-8 py-3 lg:px-10 lg:py-3 rounded-xl'>
+          <Link
+            to='/products'
+            className='bg-accent text-white text-base lg:text-2xl font-semibold px-8 py-3 lg:px-10 lg:py-3 rounded-xl'>
             Shop now
-          </button>
+          </Link>
           <button className='border border-primary text-primary text-base lg:text-2xl font-semibold px-8 py-3 lg:px-10 lg:py-3 rounded-xl'>
             Learn more
           </button>

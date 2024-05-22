@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import ProductCard from './ProductCard';
+import { Link } from 'react-router-dom';
 
 const FeaturedProduct = ({ productData }) => {
   const featuredData = productData.filter((product) => product.isFeatured === true);
@@ -12,9 +13,11 @@ const FeaturedProduct = ({ productData }) => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
-      <button className='bg-accent text-white text-lg lg:text-2xl font-normal px-6 py-3 lg:px-10 lg:py-4 rounded-xl'>
+      <Link
+        to='/products'
+        className='bg-accent text-white text-lg lg:text-2xl font-normal px-6 py-3 lg:px-10 lg:py-4 rounded-xl'>
         VIEW PRODUCTS
-      </button>
+      </Link>
     </section>
   );
 };
