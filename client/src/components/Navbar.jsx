@@ -47,16 +47,18 @@ const Navbar = () => {
         </div>
         <div className='flex items-center gap-10'>
           <div className='flex items-center gap-4'>
-            <Link to='/' className='text-white text-base font-semibold'>
+            <Link to='/' className='text-white text-base font-semibold cursor-pointer'>
               HOME
             </Link>
-            <Link to='/' className='text-white text-base font-semibold'>
+            <Link to='/' className='text-white text-base font-semibold cursor-pointer'>
               ABOUT US
             </Link>
-            <Link to='/products' className='text-white text-base font-semibold'>
+            <Link to='/products' className='text-white text-base font-semibold cursor-pointer'>
               PRODUCTS
             </Link>
-            <Link to='/' className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>
+            <Link
+              to='/products'
+              className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent cursor-pointer'>
               SHOP NOW
             </Link>
           </div>
