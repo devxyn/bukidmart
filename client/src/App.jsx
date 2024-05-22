@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import Main from './pages/Main';
 import Cart from './pages/Cart';
 import AllProducts from './pages/AllProducts';
+import fetchAllProducts from './loader/fetchAllProducts';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Main />,
+        loader: fetchAllProducts,
       },
       {
         path: '/login',
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <AllProducts />,
+        loader: fetchAllProducts,
       },
     ],
   },

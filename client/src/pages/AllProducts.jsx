@@ -1,22 +1,10 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import ProductCard from '../components/ProductCard';
+import { useLoaderData } from 'react-router-dom';
 
 const AllProducts = () => {
-  const [productData, setProductData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  useEffect(() => {
-    handleFetchProductData();
-  }, []);
-
-  const handleFetchProductData = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/api/products');
-      setProductData(response.data.products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const productData = useLoaderData();
+  const [filteredData, setFilteredData] = useState(productData);
 
   const handleFilterProducts = (category) => {
     if (category === 'All') {
@@ -29,10 +17,10 @@ const AllProducts = () => {
   };
 
   return (
-    <main className='h-full p-5 pt-[120px] md:p-20 md:pt-[160px]'>
-      <h2 className='text-5xl font-semibold'>All Products</h2>
+    <main className='h-full p-5 pt-[120px] lg:p-20 lg:pt-[160px]'>
+      <h2 className='text-3xl md:text-5xl font-semibold'>All Products</h2>
 
-      <div className='flex flex-row justify-center gap-5 mb-10'>
+      <div className='flex flex-row justify-center gap-2 lg:gap-5'>
         <button className='bg-secondary text-white px-4 py-2 rounded-badge' onClick={() => handleFilterProducts('All')}>
           All
         </button>
@@ -53,7 +41,7 @@ const AllProducts = () => {
         </button>
       </div>
 
-      <div className='grid grid-cols-4 gap-4 justify-items-center'>
+      <div className='grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-5 justify-items-center my-10'>
         {filteredData.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
