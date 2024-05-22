@@ -13,7 +13,9 @@ const Navbar = () => {
               BukidMart
             </Link>
           </div>
-          <HiOutlineShoppingBag size={32} className='stroke-white' />
+          <Link to='/cart'>
+            <HiOutlineShoppingBag size={32} className='stroke-white' />
+          </Link>
         </div>
         <div className='relative w-[90%]'>
           <input
@@ -45,12 +47,22 @@ const Navbar = () => {
         </div>
         <div className='flex items-center gap-10'>
           <div className='flex items-center gap-4'>
-            <Link className='text-white text-base font-semibold'>HOME</Link>
-            <Link className='text-white text-base font-semibold'>ABOUT US</Link>
-            <Link className='text-white text-base font-semibold'>PRODUCTS</Link>
-            <Link className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>SHOP NOW</Link>
+            <Link to='/' className='text-white text-base font-semibold'>
+              HOME
+            </Link>
+            <Link to='/' className='text-white text-base font-semibold'>
+              ABOUT US
+            </Link>
+            <Link to='/' className='text-white text-base font-semibold'>
+              PRODUCTS
+            </Link>
+            <Link to='/' className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>
+              SHOP NOW
+            </Link>
           </div>
-          <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
+          <Link to='/cart'>
+            <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
+          </Link>
         </div>
       </div>
     </nav>

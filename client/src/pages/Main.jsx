@@ -1,6 +1,5 @@
 import Banner from '../components/Banner';
 import FeaturedProduct from '../components/FeaturedProduct';
-import Footer from '../components/Footer';
 import StatementSection from '../components/StatementSection';
 import Testimonials from '../components/Testimonials';
 
@@ -11,7 +10,6 @@ const Main = () => {
       <FeaturedProduct />
       <StatementSection />
       <Testimonials />
-      <Footer />
     </>
   );
 };
