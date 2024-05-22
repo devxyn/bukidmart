@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className='fixed z-50 h-[100px] md:h-[80px] w-full bg-primary shadow-md'>
+    <nav className='fixed z-50 h-[100px] lg:h-[80px] w-full bg-primary shadow-md'>
       {/* {Mobile Nav bar} */}
-      <div className='h-full w-full flex flex-col gap-2 items-center justify-center md:hidden'>
+      <div className='h-full w-full flex flex-col gap-2 items-center justify-center lg:hidden'>
         <div className='w-full flex justify-between px-5 items-center'>
           <div className='flex gap-1'>
             <HiBars3 size={32} className='fill-white' />
@@ -28,7 +28,7 @@ const Navbar = () => {
       </div>
 
       {/* {Desktop Nav bar} */}
-      <div className='hidden md:flex h-full px-10 items-center justify-between'>
+      <div className='hidden lg:flex h-full px-10 items-center justify-between'>
         <div className='flex items-center gap-10'>
           <Link to='/' className='text-4xl font-bold text-white'>
             BukidMart

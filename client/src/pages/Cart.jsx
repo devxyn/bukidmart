@@ -8,7 +8,7 @@ const Cart = () => {
     <main
       className={`h-screen md:h-${
         userID ? 'full' : 'screen'
-      } p-5 pt-[120px] md:p-20 md:pt-[160px] flex flex-col gap-4 relative`}>
+      } p-5 pt-[120px] lg:p-20 lg:pt-[160px] flex flex-col gap-4 relative`}>
       <h2 className='text-4xl md:text-6xl font-semibold'>Your Cart</h2>
       <section>
         {userID ? (
