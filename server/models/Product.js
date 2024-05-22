@@ -8,9 +8,10 @@ const productSchema = new Schema({
   imageUrl: { type: String, required: true, default: 'image.png' },
   category: {
     type: String,
-    enum: ['rice', 'vegetable', 'fruit', 'handmade', 'treat'],
+    enum: ['rice', 'vegetable', 'fruit'],
     required: true,
   },
+  isFeatured: { type: Boolean, default: false },
 });
 
 const Product = model('Product', productSchema);
