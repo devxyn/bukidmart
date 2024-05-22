@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link } from 'react-router-dom';
 
 const AllProducts = () => {
   const productData = useLoaderData();
@@ -43,7 +43,9 @@ const AllProducts = () => {
 
       <div className='grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-5 justify-items-center my-10'>
         {filteredData.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <Link to={`/products/${product._id}`} key={product._id}>
+            <ProductCard product={product} />
+          </Link>
         ))}
       </div>
     </main>
