@@ -7,6 +7,8 @@ import Main from './pages/Main';
 import Cart from './pages/Cart';
 import AllProducts from './pages/AllProducts';
 import fetchAllProducts from './loader/fetchAllProducts';
+import Product from './pages/Product';
+import fetchOneProduct from './loader/fetchOneProduct';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,11 @@ const router = createBrowserRouter([
         path: '/products',
         element: <AllProducts />,
         loader: fetchAllProducts,
+      },
+      {
+        path: '/products/:id',
+        element: <Product />,
+        loader: fetchOneProduct,
       },
     ],
   },
