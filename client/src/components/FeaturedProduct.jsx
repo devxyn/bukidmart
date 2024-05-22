@@ -10,7 +10,9 @@ const FeaturedProduct = ({ productData }) => {
       <h2 className='text-2xl lg:text-5xl tracking-widest'>FEATURED PRODUCTS</h2>
       <div className='flex w-full lg:justify-center overflow-x-scroll lg:overflow-x-auto gap-5 lg:gap-10 scroll-smooth'>
         {featuredData.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <Link to={`/products/${product._id}`} key={product._id}>
+            <ProductCard product={product} />
+          </Link>
         ))}
       </div>
       <Link
