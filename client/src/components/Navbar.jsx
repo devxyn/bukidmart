@@ -53,7 +53,7 @@ const Navbar = () => {
             <Link to='/' className='text-white text-base font-semibold'>
               ABOUT US
             </Link>
-            <Link to='/' className='text-white text-base font-semibold'>
+            <Link to='/products' className='text-white text-base font-semibold'>
               PRODUCTS
             </Link>
             <Link to='/' className='text-white text-base font-semibold px-4 py-3 rounded-lg bg-accent'>
