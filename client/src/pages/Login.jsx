@@ -18,7 +18,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(url, { email, password });
-      console.log(response);
 
       if (response.status === 200) {
         setCookies('access_token', response.data.token);

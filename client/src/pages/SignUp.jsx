@@ -23,7 +23,6 @@ const SignUp = () => {
           navigate('/login');
         }, 2500);
       }
-      console.log(result);
     } catch (error) {
       console.error(error.message);
     }
