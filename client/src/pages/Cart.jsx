@@ -10,8 +10,12 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      const response = await axios.get(`http://localhost:4000/api/cart/${userID}`);
-      setCartItems(response.data.cart);
+      try {
+        const response = await axios.get(`http://localhost:4000/api/cart/${userID}`);
+        setCartItems(response.data.cart);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchCartItems();
   }, []);
@@ -20,8 +24,8 @@ const Cart = () => {
 
   return (
     <main
-      className={`h-screen lg:${
-        cartItems.length < 2 ? 'h-screen' : 'h-full'
+      className={`${cartItems.length <= 3 ? 'h-screen ' : 'h-full'} ${
+        cartItems.length <= 2 ? 'h-screen ' : 'h-full'
       } p-5 pt-[120px] lg:p-20 lg:pt-[160px] flex flex-col gap-4 relative`}>
       <h2 className='text-4xl md:text-6xl font-semibold'>Your Cart</h2>
       <section>
@@ -32,7 +36,10 @@ const Cart = () => {
                 <CartItem key={item.product._id} item={item} />
               ))}
             </div>
-            <div className='flex flex-col md:flex-row justify-end items-center gap-2 absolute bottom-4 left-4 right-4 md:static'>
+            <div
+              className={`flex flex-col md:flex-row justify-end items-center gap-2 ${
+                cartItems.length <= 3 ? 'absolute bottom-4 left-4 right-4' : ''
+              } md:static`}>
               <div className='flex flex-row justify-between md:gap-2 w-full md:w-auto'>
                 <h3 className='text-xl md:text-2xl'>Total:</h3>
                 <h3 className='text-xl md:text-2xl font-semibold mr-4'>₱{cartTotal.toLocaleString('en-US')}</h3>
