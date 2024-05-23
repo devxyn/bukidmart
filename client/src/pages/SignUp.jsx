@@ -23,14 +23,13 @@ const SignUp = () => {
           navigate('/login');
         }, 2500);
       }
-      console.log(result);
     } catch (error) {
       console.error(error.message);
     }
   };
 
   return (
-    <div className='min-h-screen flex justify-center md:items-center '>
+    <div className='min-h-[95vh] flex justify-center items-center '>
       <form
         onSubmit={handleSignup}
         className='w-[90%] md:w-[35%] md:border md:border-gray-300 md:p-10 md:rounded-lg flex flex-col items-center gap-4'>
