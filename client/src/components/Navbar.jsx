@@ -1,7 +1,17 @@
 import { HiBars3, HiOutlineMagnifyingGlass, HiOutlineShoppingBag } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Navbar = () => {
+  const [cookies, setCookies] = useCookies(['access_token']);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setCookies('access_token', '');
+    window.localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <nav className='fixed z-50 h-[100px] lg:h-[80px] w-full bg-primary shadow-md'>
       {/* {Mobile Nav bar} */}
@@ -13,7 +23,7 @@ const Navbar = () => {
               BukidMart
             </Link>
           </div>
-          <Link to='/cart'>
+          <Link to={cookies.access_token ? '/cart' : '/login'}>
             <HiOutlineShoppingBag size={32} className='stroke-white' />
           </Link>
         </div>
@@ -45,7 +55,7 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div className='flex items-center gap-10'>
+        <div className='flex items-center gap-8'>
           <div className='flex items-center gap-4'>
             <Link to='/' className='text-white text-base font-semibold cursor-pointer'>
               HOME
@@ -62,9 +72,16 @@ const Navbar = () => {
               SHOP NOW
             </Link>
           </div>
-          <Link to='/cart'>
-            <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
-          </Link>
+          <div className='flex gap-4 items-center'>
+            <button
+              className='text-white text-base font-semibold px-4 py-3 rounded-lg border-2 border-white cursor-pointer'
+              onClick={handleLogout}>
+              {cookies.access_token ? 'Log out' : 'Sign in'}
+            </button>
+            <Link to={cookies.access_token ? '/cart' : '/login'}>
+              <HiOutlineShoppingBag size={32} className='stroke-white cursor-pointer' />
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
