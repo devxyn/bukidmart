@@ -65,3 +65,24 @@ export const checkout = async (req, res) => {
     res.status(500).json({ message: 'Something went wrong!' });
   }
 };
+
+export const removeFromCart = async (req, res) => {
+  const { userID, productID } = req.body;
+
+  try {
+    const user = await User.findById(userID);
+    if (!user) return res.status(404).json({ message: 'User not found!' });
+
+    const initialCartLength = user.cart.length;
+    user.cart = user.cart.filter((item) => item.product.toString() !== productID);
+
+    if (user.cart.length === initialCartLength) {
+      return res.status(404).json({ message: 'Product not found in cart!' });
+    }
+
+    await user.save();
+    res.status(200).json({ message: 'Product removed from cart!', cart: user.cart });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong!' });
+  }
+};
