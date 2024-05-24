@@ -55,7 +55,7 @@ const CheckOut = () => {
       [id]: value,
     }));
   };
-  console.log(deliveryForm);
+
   const handleCheckOut = async () => {
     try {
       const response = await axios.post('http://localhost:4000/api/cart/checkout', { userID, deliveryForm });
