@@ -11,7 +11,7 @@ const Login = () => {
   // eslint-disable-next-line no-unused-vars
   const [_, setCookies] = useCookies('access_token');
 
-  const url = 'http://localhost:4000/api/auth/login';
+  const url = 'https://bukidmart.onrender.com/api/auth/login';
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {

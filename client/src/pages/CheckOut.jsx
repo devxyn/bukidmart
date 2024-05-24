@@ -58,7 +58,7 @@ const CheckOut = () => {
 
   const handleCheckOut = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/api/cart/checkout', { userID, deliveryForm });
+      const response = await axios.post('https://bukidmart.onrender.com/api/cart/checkout', { userID, deliveryForm });
       if (response.status === 200) setIsCheckOutSuccess(true);
 
       setTimeout(() => {

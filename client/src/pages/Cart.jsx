@@ -21,7 +21,7 @@ const Cart = () => {
 
   const removeItem = async (productID) => {
     try {
-      await axios.post('http://localhost:4000/api/cart/remove', { userID, productID });
+      await axios.post('https://bukidmart.onrender.com/api/cart/remove', { userID, productID });
     } catch (error) {
       console.error(error);
     }

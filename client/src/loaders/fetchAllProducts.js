@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fetchAllProducts = async () => {
   try {
-    const response = await axios.get('http://localhost:4000/api/products');
+    const response = await axios.get('https://bukidmart.onrender.com/api/products');
     return response.data.products;
   } catch (error) {
     console.error(error);

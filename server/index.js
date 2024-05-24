@@ -26,7 +26,11 @@ try {
 }
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://bukidmart.vercel.app', // Allow specific origin
+  }),
+);
 
 app.use((err, _, res, __) => {
   console.error(err.stack);
