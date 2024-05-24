@@ -42,7 +42,6 @@ const CheckOut = () => {
       ...prev,
       [id]: value,
     }));
-    console.log(deliveryForm);
   };
 
   const handlePaymentChange = (e) => {
@@ -51,7 +50,6 @@ const CheckOut = () => {
       ...prev,
       [id]: value,
     }));
-    console.log(paymentForm);
   };
 
   return (
