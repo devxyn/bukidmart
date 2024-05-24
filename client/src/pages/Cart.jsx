@@ -2,22 +2,20 @@
 import { useEffect, useState } from 'react';
 import CartItem from '../components/CartItem';
 import useGetUserID from './../hooks/useGetUserID';
-import axios from 'axios';
+import { fetchCartItems } from './../services/fetchCartItems';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const userID = useGetUserID();
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const response = await axios.get(`http://localhost:4000/api/cart/${userID}`);
-        setCartItems(response.data.cart);
-      } catch (error) {
-        console.error(error);
-      }
+    const getCartItems = async () => {
+      const items = await fetchCartItems(userID);
+      setCartItems(items);
     };
-    fetchCartItems();
+
+    getCartItems();
   }, []);
 
   const cartTotal = cartItems.map((item) => item.product.price * item.quantity).reduce((acc, cur) => acc + cur, 0);
@@ -25,7 +23,7 @@ const Cart = () => {
   return (
     <main
       className={`${cartItems.length <= 3 ? 'h-screen ' : 'h-full'} ${
-        cartItems.length <= 2 ? 'h-screen ' : 'h-full'
+        cartItems.length <= 2 ? 'lg:h-screen ' : 'lg:h-full'
       } p-5 pt-[120px] lg:p-20 lg:pt-[160px] flex flex-col gap-4 relative`}>
       <h2 className='text-4xl md:text-6xl font-semibold'>Your Cart</h2>
       <section>
@@ -33,7 +31,7 @@ const Cart = () => {
           <>
             <div className='my-10 flex flex-col gap-2'>
               {cartItems.map((item) => (
-                <CartItem key={item.product._id} item={item} />
+                <CartItem key={item.product._id} item={item} imgHeight={'h-40'} />
               ))}
             </div>
             <div
@@ -44,9 +42,11 @@ const Cart = () => {
                 <h3 className='text-xl md:text-2xl'>Total:</h3>
                 <h3 className='text-xl md:text-2xl font-semibold mr-4'>₱{cartTotal.toLocaleString('en-US')}</h3>
               </div>
-              <button className='text-white text-lg md:text-xl font-semibold px-6 py-3 rounded-lg bg-accent w-full md:w-auto'>
+              <Link
+                to='/checkout'
+                className='text-white text-center text-lg md:text-xl font-semibold px-6 py-3 rounded-lg bg-accent w-full md:w-auto'>
                 Check Out
-              </button>
+              </Link>
             </div>
           </>
         ) : (
