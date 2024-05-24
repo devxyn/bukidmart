@@ -4,6 +4,7 @@ import CartItem from '../components/CartItem';
 import useGetUserID from './../hooks/useGetUserID';
 import { fetchCartItems } from './../services/fetchCartItems';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -16,7 +17,15 @@ const Cart = () => {
     };
 
     getCartItems();
-  }, []);
+  }, [cartItems]);
+
+  const removeItem = async (productID) => {
+    try {
+      await axios.post('http://localhost:4000/api/cart/remove', { userID, productID });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const cartTotal = cartItems.map((item) => item.product.price * item.quantity).reduce((acc, cur) => acc + cur, 0);
 
@@ -31,7 +40,13 @@ const Cart = () => {
           <>
             <div className='my-10 flex flex-col gap-2'>
               {cartItems.map((item) => (
-                <CartItem key={item.product._id} item={item} imgHeight={'h-40'} />
+                <CartItem
+                  key={item.product._id}
+                  item={item}
+                  imgHeight={'h-40'}
+                  isDisplayed={true}
+                  removeItem={() => removeItem(item.product._id)}
+                />
               ))}
             </div>
             <div
