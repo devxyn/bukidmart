@@ -4,9 +4,12 @@ import useGetUserID from '../hooks/useGetUserID';
 import { fetchCartItems } from '../services/fetchCartItems';
 import FormInput from '../components/FormInput';
 import CartItem from '../components/CartItem';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CheckOut = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [isCheckOutSuccess, setIsCheckOutSuccess] = useState(false);
   const [deliveryForm, setDeliveryForm] = useState({
     fullName: '',
     address: '',
@@ -24,6 +27,7 @@ const CheckOut = () => {
   });
 
   const userID = useGetUserID();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCartItems = async () => {
@@ -50,6 +54,19 @@ const CheckOut = () => {
       ...prev,
       [id]: value,
     }));
+  };
+  console.log(deliveryForm);
+  const handleCheckOut = async () => {
+    try {
+      const response = await axios.post('http://localhost:4000/api/cart/checkout', { userID, deliveryForm });
+      if (response.status === 200) setIsCheckOutSuccess(true);
+
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -129,8 +146,11 @@ const CheckOut = () => {
             onChange={handlePaymentChange}
           />
         </div>
-        <button className='hidden lg:block text-white text-center text-lg md:text-xl font-semibold px-6 py-3 rounded-lg bg-accent w-full md:w-auto'>
-          Place order
+        <button
+          className='hidden lg:block text-white text-center text-lg md:text-xl font-semibold px-6 py-3 rounded-lg bg-accent w-full md:w-auto'
+          onClick={handleCheckOut}
+          disabled={isCheckOutSuccess}>
+          {isCheckOutSuccess ? 'Order placed successfully!' : ' Place order'}
         </button>
       </div>
       <div className='w-full flex flex-col gap-5 my-5 lg:my-0 lg:w-[45%] lg:pt-[160px] lg:pb-20 lg:bg-backdrop lg:px-10'>
@@ -144,8 +164,11 @@ const CheckOut = () => {
           <h3 className='text-xl font-semibold'>Total:</h3>
           <h3 className='text-xl font-semibold text-secondary'>₱{cartTotal.toLocaleString('en-US')}</h3>
         </div>
-        <button className='lg:hidden text-white text-center text-lg md:text-xl font-semibold px-6 py-3 rounded-lg bg-accent w-full md:w-auto'>
-          Place order
+        <button
+          className='lg:hidden text-white text-center text-lg md:text-xl font-semibold px-6 py-3 rounded-lg bg-accent w-full md:w-auto'
+          onClick={handleCheckOut}
+          disabled={isCheckOutSuccess}>
+          {isCheckOutSuccess ? 'Order placed successfully!' : ' Place order'}
         </button>
       </div>
     </main>

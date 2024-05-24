@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import Product from '../models/Product.js';
 import Order from '../models/Orders.js';
 
-export const addToCart = async (req, res) => async (req, res) => {
+export const addToCart = async (req, res) => {
   const { userID, product, quantity } = req.body;
 
   try {
@@ -36,7 +36,7 @@ export const getUserCart = async (req, res) => {
 };
 
 export const checkout = async (req, res) => {
-  const { userID } = req.body;
+  const { userID, deliveryForm } = req.body;
 
   try {
     const user = await User.findById(userID);
@@ -55,12 +55,12 @@ export const checkout = async (req, res) => {
     });
 
     const total = cart.map((item) => item.product.price * item.quantity).reduce((acc, cur) => acc + cur, 0);
-    const order = await Order.create({ userID, products, total });
+    const order = await Order.create({ userID, products, total, address: deliveryForm });
 
     user.cart = [];
     await user.save();
 
-    res.status(200).json({ message: 'Order placed successfully!', order });
+    res.status(200).json({ message: 'Order placed successfully!', order, address: deliveryForm });
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong!' });
   }
