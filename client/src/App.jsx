@@ -6,9 +6,10 @@ import SignUp from './pages/SignUp';
 import Main from './pages/Main';
 import Cart from './pages/Cart';
 import AllProducts from './pages/AllProducts';
-import fetchAllProducts from './loader/fetchAllProducts';
+import fetchAllProducts from './loaders/fetchAllProducts';
 import Product from './pages/Product';
-import fetchOneProduct from './loader/fetchOneProduct';
+import fetchOneProduct from './loaders/fetchOneProduct';
+import CheckOut from './pages/CheckOut';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         path: '/products/:id',
         element: <Product />,
         loader: fetchOneProduct,
+      },
+      {
+        path: '/checkout',
+        element: <CheckOut />,
       },
     ],
   },
