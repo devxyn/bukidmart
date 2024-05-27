@@ -8,7 +8,7 @@ const SignUp = () => {
   const [isSuccess, setIsSuceess] = useState(false);
   const [message, setMessage] = useState('');
 
-  const url = 'https://bukidmart.onrender.com/api/auth/signup';
+  const url = 'https://bukidmart-server.vercel.app/api/auth/signup';
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {

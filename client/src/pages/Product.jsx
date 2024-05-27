@@ -16,7 +16,7 @@ const Product = () => {
 
   const handleAddToCart = async () => {
     try {
-      const response = await axios.put('https://bukidmart.onrender.com/api/cart/add', cartItem);
+      const response = await axios.put('https://bukidmart-server.vercel.app/api/cart/add', cartItem);
       if (response.status === 201) setIsSuccess(true);
     } catch (error) {
       console.error(error);

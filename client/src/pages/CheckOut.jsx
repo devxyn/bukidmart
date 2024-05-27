@@ -58,7 +58,10 @@ const CheckOut = () => {
 
   const handleCheckOut = async () => {
     try {
-      const response = await axios.post('https://bukidmart.onrender.com/api/cart/checkout', { userID, deliveryForm });
+      const response = await axios.post('https://bukidmart-server.vercel.app/api/cart/checkout', {
+        userID,
+        deliveryForm,
+      });
       if (response.status === 200) setIsCheckOutSuccess(true);
 
       setTimeout(() => {
