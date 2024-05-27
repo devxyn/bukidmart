@@ -44,6 +44,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Express on Vercel');
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running in port ${PORT}`);
 });
