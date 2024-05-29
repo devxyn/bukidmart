@@ -1,10 +1,18 @@
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 /* eslint-disable react/no-unescaped-entities */
 const ProductTable = () => {
   const products = useLoaderData();
 
   console.log(products);
+
+  const cutString = (str, num) => {
+    if (str.length > num) {
+      return str.slice(0, num) + '...';
+    }
+
+    return str;
+  };
 
   return (
     <div className='relative overflow-x-auto sm:rounded-lg py-10'>
@@ -24,6 +32,9 @@ const ProductTable = () => {
               Price
             </th>
             <th scope='col' className='px-6 py-3'>
+              Stocks
+            </th>
+            <th scope='col' className='px-6 py-3'>
               Category
             </th>
             <th scope='col' className='px-6 py-3'>
@@ -39,10 +50,16 @@ const ProductTable = () => {
               <th scope='row' className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
                 {item?.name}
               </th>
-              <td className='px-6 py-4'>{item?.description}</td>
-              <td className='px-6 py-4'>${item?.price}</td>
+              <td className='px-6 py-4'>{cutString(item?.description, 60)}</td>
+              <td className='px-6 py-4'>₱{item?.price.toLocaleString('en-US')}</td>
+              <td className='px-6 py-4'>{item?.stocks.toLocaleString('en-US')}</td>
               <td className='px-6 py-4'>{item?.category}</td>
               <td className='flex items-center px-6 py-4'>
+                <Link
+                  to={`/auth/admin/products/${item?._id}/edit`}
+                  className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>
+                  Edit
+                </Link>
                 <a href='#' className='font-medium text-red-600 dark:text-red-500 hover:underline ms-3'>
                   Remove
                 </a>
