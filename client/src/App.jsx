@@ -10,6 +10,8 @@ import fetchAllProducts from './loaders/fetchAllProducts';
 import Product from './pages/Product';
 import fetchOneProduct from './loaders/fetchOneProduct';
 import CheckOut from './pages/CheckOut';
+import Admin from './pages/Admin';
+import ProductTable from './components/ProductTable';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,11 @@ const router = createBrowserRouter([
         element: <CheckOut />,
       },
     ],
+  },
+  {
+    path: '/auth/admin',
+    element: <Admin />,
+    children: [{ path: '/auth/admin/products', element: <ProductTable />, loader: fetchAllProducts }],
   },
 ]);
 
