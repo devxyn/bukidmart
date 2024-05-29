@@ -12,6 +12,7 @@ import fetchOneProduct from './loaders/fetchOneProduct';
 import CheckOut from './pages/CheckOut';
 import Admin from './pages/Admin';
 import ProductTable from './components/ProductTable';
+import EditProduct from './components/EditProduct';
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,18 @@ const router = createBrowserRouter([
   {
     path: '/auth/admin',
     element: <Admin />,
-    children: [{ path: '/auth/admin/products', element: <ProductTable />, loader: fetchAllProducts }],
+    children: [
+      {
+        path: '/auth/admin/products',
+        element: <ProductTable />,
+        loader: fetchAllProducts,
+      },
+      {
+        path: '/auth/admin/products/:id/edit',
+        element: <EditProduct />,
+        loader: fetchOneProduct,
+      },
+    ],
   },
 ]);
 
