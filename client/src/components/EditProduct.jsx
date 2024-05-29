@@ -1,9 +1,11 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import FormInput from './FormInput';
 import { useState } from 'react';
+import axios from 'axios';
 
 const EditProduct = () => {
   const product = useLoaderData();
+  const navigate = useNavigate();
 
   const [modifiedProduct, setModifiedProduct] = useState({
     id: product?._id,
@@ -22,29 +24,35 @@ const EditProduct = () => {
     }));
   };
 
-  return (
-    <div className='w-full px-20 my-40 h-screen flex flex-col gap-5'>
-      <h2 className='text-4xl font-semibold'>Edit Product</h2>
-      <div className='flex flex-col gap-4'>
-        <div className='flex flex-col gap-4'>
-          <FormInput
-            id={'name'}
-            value={modifiedProduct?.name}
-            width={'w-1/2'}
-            type={'text'}
-            label={'Product name'}
-            onChange={handleEditProduct}
-          />
-          <FormInput
-            id={'description'}
-            value={modifiedProduct?.description}
-            width={'w-1/2'}
-            type={'text'}
-            label={'Product description'}
-            onChange={handleEditProduct}
-          />
-        </div>
+  const handleSubmitModifiedProduct = async () => {
+    try {
+      await axios.patch(`http://localhost:4000/api/products/modify`, modifiedProduct);
+      navigate('/auth/admin/products');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  return (
+    <div className='w-full px-20 my-40 h-screen'>
+      <h2 className='text-4xl font-semibold mb-5'>Edit Product</h2>
+      <div className='flex flex-col gap-4 mb-4'>
+        <FormInput
+          id={'name'}
+          value={modifiedProduct?.name}
+          width={'w-1/2'}
+          type={'text'}
+          label={'Product name'}
+          onChange={handleEditProduct}
+        />
+        <FormInput
+          id={'description'}
+          value={modifiedProduct?.description}
+          width={'w-1/2'}
+          type={'text'}
+          label={'Product description'}
+          onChange={handleEditProduct}
+        />
         <FormInput
           id={'price'}
           value={modifiedProduct?.price}
@@ -81,6 +89,11 @@ const EditProduct = () => {
           </select>
         </div>
       </div>
+      <button
+        className='bg-accent text-white rounded-btn py-3 px-6 font-semibold'
+        onClick={handleSubmitModifiedProduct}>
+        Submit
+      </button>
     </div>
   );
 };
