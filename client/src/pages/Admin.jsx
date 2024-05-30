@@ -7,7 +7,9 @@ const Admin = () => {
         <Link to='/auth/admin/products' className='text-white text-2xl px-16 hover:bg-white hover:text-primary py-2'>
           Products
         </Link>
-        <Link className='text-white text-2xl px-16 hover:bg-white hover:text-primary py-2'>Orders</Link>
+        <Link to='/auth/admin/orders' className='text-white text-2xl px-16 hover:bg-white hover:text-primary py-2'>
+          Orders
+        </Link>
         <Link className='text-white text-2xl px-16 hover:bg-white hover:text-primary py-2'>Users</Link>
       </div>
       <div className='w-[80%] ml-[20%] h-screen'>
