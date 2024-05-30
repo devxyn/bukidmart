@@ -24,8 +24,8 @@ const ProductTable = () => {
   };
 
   return (
-    <div className='relative overflow-x-auto sm:rounded-lg w-full px-20 my-40 h-screen'>
-      <div className='w-full flex flex-col md:flex-row md:justify-between p-5'>
+    <div className='overflow-x-auto sm:rounded-lg w-full px-20 my-40 h-screen'>
+      <div className='w-full flex flex-col md:flex-row md:justify-between mb-5'>
         <h2 className='text-4xl font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800'>
           Products
         </h2>
