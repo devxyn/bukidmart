@@ -11,6 +11,7 @@ const EditProduct = () => {
     id: product?._id,
     name: product?.name || '',
     description: product?.description || '',
+    imageUrl: product?.imageUrl || '',
     price: product?.price || 0,
     stocks: product?.stocks || 0,
     category: product?.category,
@@ -51,6 +52,14 @@ const EditProduct = () => {
           width={'w-1/2'}
           type={'text'}
           label={'Product description'}
+          onChange={handleEditProduct}
+        />
+        <FormInput
+          id={'imageUrl'}
+          value={modifiedProduct?.imageUrl}
+          width={'w-1/2'}
+          type={'text'}
+          label={'Product image url'}
           onChange={handleEditProduct}
         />
         <FormInput

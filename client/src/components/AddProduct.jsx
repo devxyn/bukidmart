@@ -7,6 +7,7 @@ const AddProduct = () => {
   const [product, setProduct] = useState({
     name: '',
     description: '',
+    imageUrl: '',
     price: 0,
     stocks: 0,
     category: 'vegetable',
@@ -49,6 +50,14 @@ const AddProduct = () => {
           type={'text'}
           label={'Product description'}
           value={product.description}
+          onChange={handleProductChange}
+        />
+        <FormInput
+          id={'imageUrl'}
+          width={'w-1/2'}
+          type={'text'}
+          label={'Product image url'}
+          value={product?.imageUrl}
           onChange={handleProductChange}
         />
         <FormInput
