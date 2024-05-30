@@ -30,21 +30,32 @@ const OrderTable = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {orders.map((order) => (
+          {orders.map((order) => (
             <tr
               key={order._id}
               className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
               <td scope='row' className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
                 {order._id}
               </td>
-              <td className='px-6 py-4'></td>
-              <td className='px-6 py-4'></td>
-              <td className='px-6 py-4'></td>
+              <td className='px-6 py-4 text-xs'>
+                <ul className='list-disc'>
+                  {order.products.map((item) => (
+                    <li key={item._id}>{item.name}</li>
+                  ))}
+                </ul>
+              </td>
+              <td className='px-6 py-4'>₱{order.total.toLocaleString('en-US')}</td>
+              <td
+                className={`px-6 py-4 font-semibold ${
+                  order.status !== 'Fulfilled' ? 'text-accent' : 'text-secondary'
+                }`}>
+                {order.status}
+              </td>
               <td className='flex items-center px-6 py-4'>
                 <Link className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>View</Link>
               </td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
     </div>
