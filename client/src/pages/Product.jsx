@@ -1,5 +1,5 @@
 import { HiArrowLongLeft, HiOutlineShoppingBag } from 'react-icons/hi2';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import useGetUserID from '../hooks/useGetUserID';
 import { useState } from 'react';
 import axios from 'axios';
@@ -10,11 +10,17 @@ const Product = () => {
 
   const [cartItem, setCartItem] = useState({ userID, product: product._id, quantity: 1 });
   const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const btnMessage = isSuccess ? 'Product added to cart!' : 'Add to cart';
 
   const handleAddToCart = async () => {
     try {
+      if (!userID) {
+        navigate('/login');
+        return;
+      }
+
       const response = await axios.put('https://bukidmart-server.vercel.app/api/cart/add', cartItem);
       if (response.status === 201) setIsSuccess(true);
     } catch (error) {
