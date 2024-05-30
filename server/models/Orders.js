@@ -11,9 +11,12 @@ const addressSchema = new Schema({
 });
 
 const orderSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: 'users' },
-  products: [{ product: { type: Schema.Types.ObjectId, ref: 'products' }, quantity: { type: Number } }],
-  total: { type: Number },
+  user: { type: Schema.Types.ObjectId, ref: 'users', required: true },
+  products: [
+    { product: { type: Schema.Types.ObjectId, ref: 'products' }, name: { type: String }, quantity: { type: Number } },
+  ],
+  status: { type: String, default: 'Pending' },
+  total: { type: Number, required: true },
   address: { type: addressSchema, required: true },
 });
 
