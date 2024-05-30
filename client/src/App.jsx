@@ -14,6 +14,8 @@ import Admin from './pages/Admin';
 import ProductTable from './components/ProductTable';
 import EditProduct from './components/EditProduct';
 import AddProduct from './components/AddProduct';
+import OrderTable from './components/OrderTable';
+import fetchAllOrders from './loaders/fetchAllOrders';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +72,11 @@ const router = createBrowserRouter([
       {
         path: '/auth/admin/products/add',
         element: <AddProduct />,
+      },
+      {
+        path: '/auth/admin/orders',
+        element: <OrderTable />,
+        loader: fetchAllOrders,
       },
     ],
   },
