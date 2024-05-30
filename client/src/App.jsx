@@ -13,6 +13,7 @@ import CheckOut from './pages/CheckOut';
 import Admin from './pages/Admin';
 import ProductTable from './components/ProductTable';
 import EditProduct from './components/EditProduct';
+import AddProduct from './components/AddProduct';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
         path: '/auth/admin/products/:id/edit',
         element: <EditProduct />,
         loader: fetchOneProduct,
+      },
+      {
+        path: '/auth/admin/products/add',
+        element: <AddProduct />,
       },
     ],
   },

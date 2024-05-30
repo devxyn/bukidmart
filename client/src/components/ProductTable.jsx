@@ -25,10 +25,15 @@ const ProductTable = () => {
 
   return (
     <div className='relative overflow-x-auto sm:rounded-lg py-10'>
-      <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
-        <caption className='p-5 mb-5 text-4xl font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800'>
+      <div className='w-full flex flex-col md:flex-row md:justify-between p-5'>
+        <h2 className='text-4xl font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800'>
           Our products
-        </caption>
+        </h2>
+        <Link to='/auth/admin/products/add' className='bg-accent text-white rounded-btn py-3 px-6 font-semibold'>
+          Add new product
+        </Link>
+      </div>
+      <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
         <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
           <tr>
             <th scope='col' className='px-6 py-3'>
