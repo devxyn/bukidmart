@@ -7,6 +7,7 @@ import 'dotenv/config.js';
 import { authRoutes } from './routes/authRoutes.js';
 import { productRoutes } from './routes/productRoutes.js';
 import { cartRoutes } from './routes/cartRoutes.js';
+import { orderRoutes } from './routes/orderRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -27,9 +28,10 @@ try {
 
 app.use(bodyParser.json());
 app.use(
-  cors({
-    origin: 'https://bukidmart.vercel.app', // Allow specific origin
-  }),
+  cors(),
+  // {
+  //   origin: 'https://bukidmart.vercel.app', // Allow specific origin
+  // }
 );
 
 app.use((err, _, res, __) => {
@@ -43,6 +45,7 @@ app.use((err, _, res, __) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.get('/', (req, res) => {
   res.send('Express on Vercel');
