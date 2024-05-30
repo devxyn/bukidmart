@@ -1,16 +1,25 @@
 import { Link, useLoaderData } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 /* eslint-disable react/no-unescaped-entities */
 const ProductTable = () => {
   const products = useLoaderData();
+  const [tableProducts, setTableProducts] = useState(products);
 
-  console.log(products);
+  const handleDeleteProduct = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/products/delete/${id}`);
+      setTableProducts(tableProducts.filter((product) => product._id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const cutString = (str, num) => {
     if (str.length > num) {
       return str.slice(0, num) + '...';
     }
-
     return str;
   };
 
@@ -43,7 +52,7 @@ const ProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((item) => (
+          {tableProducts.map((item) => (
             <tr
               key={item?._id}
               className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
@@ -60,9 +69,11 @@ const ProductTable = () => {
                   className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>
                   Edit
                 </Link>
-                <a href='#' className='font-medium text-red-600 dark:text-red-500 hover:underline ms-3'>
+                <button
+                  onClick={() => handleDeleteProduct(item?._id)}
+                  className='font-medium text-red-600 dark:text-red-500 hover:underline ms-3'>
                   Remove
-                </a>
+                </button>
               </td>
             </tr>
           ))}
