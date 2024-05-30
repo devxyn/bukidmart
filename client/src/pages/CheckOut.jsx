@@ -58,7 +58,7 @@ const CheckOut = () => {
 
   const handleCheckOut = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/api/cart/checkout', {
+      const response = await axios.post('https://bukidmart-server.vercel.app/api/cart/checkout', {
         userID,
         deliveryForm,
       });

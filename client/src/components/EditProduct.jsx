@@ -27,7 +27,7 @@ const EditProduct = () => {
 
   const handleSubmitModifiedProduct = async () => {
     try {
-      await axios.patch(`http://localhost:4000/api/products/modify`, modifiedProduct);
+      await axios.patch(`https://bukidmart-server.vercel.app/api/products/modify`, modifiedProduct);
       navigate('/auth/admin/products');
     } catch (error) {
       console.error(error);
