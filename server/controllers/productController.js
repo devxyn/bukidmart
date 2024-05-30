@@ -55,3 +55,20 @@ export const modifyProduct = async (req, res) => {
     res.status(500).json({ message: 'Something went wrong!' });
   }
 };
+
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.findById(id);
+
+    if (!product) {
+      res.status(404).json({ message: 'Product not found!' });
+      return;
+    }
+
+    await Product.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong!' });
+  }
+};
