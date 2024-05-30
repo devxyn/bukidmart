@@ -24,10 +24,10 @@ const ProductTable = () => {
   };
 
   return (
-    <div className='relative overflow-x-auto sm:rounded-lg py-10'>
+    <div className='relative overflow-x-auto sm:rounded-lg w-full px-20 my-40 h-screen'>
       <div className='w-full flex flex-col md:flex-row md:justify-between p-5'>
         <h2 className='text-4xl font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800'>
-          Our products
+          Products
         </h2>
         <Link to='/auth/admin/products/add' className='bg-accent text-white rounded-btn py-3 px-6 font-semibold'>
           Add new product
@@ -67,7 +67,7 @@ const ProductTable = () => {
               <td className='px-6 py-4'>{cutString(item?.description, 60)}</td>
               <td className='px-6 py-4'>₱{item?.price.toLocaleString('en-US')}</td>
               <td className='px-6 py-4'>{item?.stocks.toLocaleString('en-US')}</td>
-              <td className='px-6 py-4'>{item?.category}</td>
+              <td className='px-6 py-4 font-semibold'>{item?.category.toUpperCase()}</td>
               <td className='flex items-center px-6 py-4'>
                 <Link
                   to={`/auth/admin/products/${item?._id}/edit`}
