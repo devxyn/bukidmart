@@ -39,12 +39,13 @@ export const getProduct = async (req, res) => {
 };
 
 export const modifyProduct = async (req, res) => {
-  const { id, name, description, price, stocks, category } = req.body;
+  const { id, name, description, imageUrl, price, stocks, category } = req.body;
 
   try {
     const product = await Product.findByIdAndUpdate(id, {
       name,
       description,
+      imageUrl,
       price,
       stocks,
       category,

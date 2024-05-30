@@ -1,4 +1,3 @@
-import cocopandan from '../assets/coco pandan.png';
 import { HiArrowLongLeft, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { Link, useLoaderData } from 'react-router-dom';
 import useGetUserID from '../hooks/useGetUserID';
@@ -44,7 +43,7 @@ const Product = () => {
           <HiArrowLongLeft size={32} className='fill-white lg:fill-secondary' />
           Back to products
         </Link>
-        <img src={cocopandan} alt='coco pandan' className='h-full object-cover object-center' />
+        <img src={product?.imageUrl} alt={product?.name} className='h-full object-cover object-center' />
         <div className='p-5 lg:p-10'>
           <div className='flex flex-col gap-2 mb-10'>
             <h3 className='text-4xl font-semibold'>{product?.name}</h3>
