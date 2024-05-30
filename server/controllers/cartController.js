@@ -51,8 +51,10 @@ export const checkout = async (req, res) => {
     });
 
     const products = cart.map((item) => {
-      return { product: item.product._id, quantity: item.quantity };
+      return { product: item.product._id, name: item.product.name, quantity: item.quantity };
     });
+
+    console.log(products);
 
     const total = cart.map((item) => item.product.price * item.quantity).reduce((acc, cur) => acc + cur, 0);
     const order = await Order.create({ userID, products, total, address: deliveryForm });
