@@ -5,7 +5,7 @@ import { HiOutlineTrash } from 'react-icons/hi2';
 const CartItem = ({ item, imgHeight, isDisplayed, removeItem }) => {
   return (
     <div className='flex w-full h-full relative'>
-      <img className={`h-20 md:${imgHeight}`} src={item?.product.imageUrl} alt='coco pandan' />
+      <img className={`h-20 md:${imgHeight}`} src={item?.product.imageUrl} alt={item?.product.name} />
       <div className='w-full flex flex-row justify-between items-center  px-3 md:px-5 gap-4'>
         <div className='w-full flex flex-col md:flex-row md:justify-between md:items-center'>
           <div className='md:w-1/2 flex flex-col'>

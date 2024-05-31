@@ -22,12 +22,20 @@ const Login = () => {
       if (response.status === 200) {
         setCookies('access_token', response.data.token);
         window.localStorage.setItem('userID', response.data.userID);
+        window.localStorage.setItem('isAdmin', response.data.isAdmin);
 
         setIsSucceess(true);
         setMessage(response.data.message);
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
+
+        if (response.data.isAdmin) {
+          setTimeout(() => {
+            navigate('/auth/admin/products');
+          }, 3000);
+        } else {
+          setTimeout(() => {
+            navigate('/');
+          }, 3000);
+        }
       }
     } catch (error) {
       console.error(error);

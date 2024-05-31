@@ -1,14 +1,14 @@
 import { HiArrowLongLeft, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
-import useGetUserID from '../hooks/useGetUserID';
 import { useState } from 'react';
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 
 const Product = () => {
   const product = useLoaderData();
-  const userID = useGetUserID();
+  const user = useAuth();
 
-  const [cartItem, setCartItem] = useState({ userID, product: product._id, quantity: 1 });
+  const [cartItem, setCartItem] = useState({ userID: user.userID, product: product._id, quantity: 1 });
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Product = () => {
 
   const handleAddToCart = async () => {
     try {
-      if (!userID) {
+      if (!user) {
         navigate('/login');
         return;
       }

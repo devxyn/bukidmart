@@ -1,27 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import CartItem from '../components/CartItem';
-import useGetUserID from './../hooks/useGetUserID';
 import { fetchCartItems } from './../services/fetchCartItems';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const userID = useGetUserID();
+  const user = useAuth();
 
   useEffect(() => {
     const getCartItems = async () => {
-      const items = await fetchCartItems(userID);
+      const items = await fetchCartItems(user.userID);
       setCartItems(items);
     };
 
     getCartItems();
-  }, [cartItems]);
+  }, []);
 
   const removeItem = async (productID) => {
     try {
-      await axios.post('https://bukidmart-server.vercel.app/api/cart/remove', { userID, productID });
+      await axios.post('https://bukidmart-server.vercel.app/api/cart/remove', { userID: user.userID, productID });
+      setCartItems(cartItems.filter((item) => item.product._id !== productID));
     } catch (error) {
       console.error(error);
     }

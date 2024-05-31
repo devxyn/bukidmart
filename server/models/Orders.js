@@ -13,7 +13,12 @@ const addressSchema = new Schema({
 const orderSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'users', required: true },
   products: [
-    { product: { type: Schema.Types.ObjectId, ref: 'products' }, name: { type: String }, quantity: { type: Number } },
+    {
+      product: { type: Schema.Types.ObjectId, ref: 'products' },
+      name: { type: String },
+      imageUrl: { type: String },
+      quantity: { type: Number },
+    },
   ],
   status: { type: String, default: 'Pending' },
   total: { type: Number, required: true },

@@ -1,5 +1,5 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import FormInput from './FormInput';
+import FormInput from './../components/FormInput';
 import { useState } from 'react';
 import axios from 'axios';
 
