@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import useGetUserID from '../hooks/useGetUserID';
 import { fetchCartItems } from '../services/fetchCartItems';
 import FormInput from '../components/FormInput';
 import CartItem from '../components/CartItem';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const CheckOut = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -26,12 +26,12 @@ const CheckOut = () => {
     cardHolder: '',
   });
 
-  const userID = useGetUserID();
+  const user = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const getCartItems = async () => {
-      const items = await fetchCartItems(userID);
+      const items = await fetchCartItems(user.userID);
       setCartItems(items);
     };
 
@@ -58,8 +58,8 @@ const CheckOut = () => {
 
   const handleCheckOut = async () => {
     try {
-      const response = await axios.post('https://bukidmart-server.vercel.app/api/cart/checkout', {
-        userID,
+      const response = await axios.post('http://localhost:4000/api/cart/checkout', {
+        userID: user.userID,
         deliveryForm,
       });
       if (response.status === 200) setIsCheckOutSuccess(true);
