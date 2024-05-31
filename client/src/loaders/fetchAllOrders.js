@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fetchAllOrders = async () => {
   try {
-    const response = await axios.get('https://bukidmart-server.vercel.app/api/orders/');
+    const response = await axios.get('http://localhost:4000/api/orders/');
     console.log(response.data.orders);
     return response.data.orders;
   } catch (error) {
