@@ -21,7 +21,7 @@ const Cart = () => {
 
   const removeItem = async (productID) => {
     try {
-      await axios.post('http://localhost:4000/api/cart/remove', { userID: user.userID, productID });
+      await axios.post('https://bukidmart-server.vercel.app/api/cart/remove', { userID: user.userID, productID });
       setCartItems(cartItems.filter((item) => item.product._id !== productID));
     } catch (error) {
       console.error(error);

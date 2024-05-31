@@ -9,7 +9,7 @@ const ProductTable = () => {
 
   const handleDeleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/products/delete/${id}`);
+      await axios.delete(`https://bukidmart-server.vercel.app/api/products/delete/${id}`);
       setTableProducts(tableProducts.filter((product) => product._id !== id));
     } catch (error) {
       console.error(error);

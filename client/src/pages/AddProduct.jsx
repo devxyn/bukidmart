@@ -25,7 +25,7 @@ const AddProduct = () => {
 
   const handleSubmitProduct = async () => {
     try {
-      await axios.post('http://localhost:4000/api/products/add', product);
+      await axios.post('https://bukidmart-server.vercel.app/api/products/add', product);
       navigate('/auth/admin/products');
     } catch (error) {
       console.error(error);
