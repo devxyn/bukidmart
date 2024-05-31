@@ -40,29 +40,37 @@ export const checkout = async (req, res) => {
 
   try {
     const user = await User.findById(userID);
-    if (!user) res.status(404).json({ message: 'User not found!' });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
 
     const productIDs = user.cart.map((item) => item.product);
     const foundProducts = await Product.find({ _id: { $in: productIDs } });
 
     const cart = user.cart.map((cartItem) => {
       const product = foundProducts.find((prod) => prod._id.toString() === cartItem.product.toString());
+      if (!product) {
+        throw new Error(`Product with ID ${cartItem.product} not found`);
+      }
       return { product, quantity: cartItem.quantity };
     });
 
     const products = cart.map((item) => {
-      return { product: item.product._id, name: item.product.name, quantity: item.quantity };
+      return {
+        product: item.product._id,
+        name: item.product.name,
+        imageUrl: item.product.imageUrl,
+        quantity: item.quantity,
+      };
     });
 
-    console.log(products);
-
     const total = cart.map((item) => item.product.price * item.quantity).reduce((acc, cur) => acc + cur, 0);
-    const order = await Order.create({ userID, products, total, address: deliveryForm });
+    const order = await Order.create({ user: userID, products, total, address: deliveryForm });
 
     user.cart = [];
     await user.save();
 
-    res.status(200).json({ message: 'Order placed successfully!', order, address: deliveryForm });
+    res.status(200).json({ message: 'Order placed successfully!', order });
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong!' });
   }
