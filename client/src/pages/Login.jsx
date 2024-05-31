@@ -22,6 +22,7 @@ const Login = () => {
       if (response.status === 200) {
         setCookies('access_token', response.data.token);
         window.localStorage.setItem('userID', response.data.userID);
+        window.localStorage.setItem('userID', response.data.isAdmin);
 
         setIsSucceess(true);
         setMessage(response.data.message);
