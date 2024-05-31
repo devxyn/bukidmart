@@ -11,11 +11,13 @@ import Product from './pages/Product';
 import fetchOneProduct from './loaders/fetchOneProduct';
 import CheckOut from './pages/CheckOut';
 import Admin from './pages/Admin';
-import ProductTable from './components/ProductTable';
-import EditProduct from './components/EditProduct';
-import AddProduct from './components/AddProduct';
-import OrderTable from './components/OrderTable';
 import fetchAllOrders from './loaders/fetchAllOrders';
+import ProductTable from './pages/ProductTable';
+import EditProduct from './pages/EditProduct';
+import AddProduct from './pages/AddProduct';
+import OrderTable from './pages/OrderTable';
+import ViewOrder from './pages/ViewOrder';
+import fetchOrder from './loaders/fetchOrder';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +79,11 @@ const router = createBrowserRouter([
         path: '/auth/admin/orders',
         element: <OrderTable />,
         loader: fetchAllOrders,
+      },
+      {
+        path: '/auth/admin/orders/:id',
+        element: <ViewOrder />,
+        loader: fetchOrder,
       },
     ],
   },
