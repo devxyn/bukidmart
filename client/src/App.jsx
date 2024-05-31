@@ -1,4 +1,5 @@
-import { RouterProvider } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { RouterProvider, useNavigate } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -18,6 +19,47 @@ import AddProduct from './pages/AddProduct';
 import OrderTable from './pages/OrderTable';
 import ViewOrder from './pages/ViewOrder';
 import fetchOrder from './loaders/fetchOrder';
+import useAuth from './hooks/useAuth';
+import { useEffect } from 'react';
+
+const ProtectedRoute = ({ element }) => {
+  const user = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.userID) {
+      navigate('/login');
+    }
+  }, []);
+
+  return element;
+};
+
+const LoggedInRoute = ({ element }) => {
+  const user = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.userID) {
+      navigate('/');
+    }
+  }, []);
+
+  return element;
+};
+
+const AdminRoute = ({ element }) => {
+  const user = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.userID || !user.isAdmin) {
+      navigate('/');
+    }
+  }, []);
+
+  return element;
+};
 
 const router = createBrowserRouter([
   {
@@ -31,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />,
+        element: <LoggedInRoute element={<Login />} />,
       },
       {
         path: '/signup',
@@ -39,7 +81,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart />,
+        element: <ProtectedRoute element={<Cart />} />,
       },
       {
         path: '/products',
@@ -53,13 +95,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/checkout',
-        element: <CheckOut />,
+        element: <ProtectedRoute element={<CheckOut />} />,
       },
     ],
   },
   {
     path: '/auth/admin',
-    element: <Admin />,
+    element: <AdminRoute element={<Admin />} />,
     children: [
       {
         path: '/auth/admin/products',
