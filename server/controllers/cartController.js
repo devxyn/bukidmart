@@ -1,26 +1,48 @@
 import User from '../models/User.js';
 import Product from '../models/Product.js';
 import Order from '../models/Orders.js';
+import mongoose from 'mongoose';
 
 export const addToCart = async (req, res) => {
-  const { userID, product, quantity } = req.body;
+  const user = req.user;
+
+  const { productId, quantity } = req.body;
+
+  if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
+    return res.status(400).json({ message: 'Invalid product!', success: false });
+  }
+
+  if (!quantity || quantity <= 0) {
+    return res.status(400).json({ message: 'Invalid quantity!', success: false });
+  }
 
   try {
-    const user = await User.findById(userID);
+    const product = await Product.findById(productId);
 
-    user.cart.push({ product, quantity });
+    if (!product) {
+      return res.status(400).json({ message: 'Product not found!', success: false });
+    }
+
+    const existingCartItem = user.cart.find((item) => item.product.toString() === productId);
+
+    if (existingCartItem) {
+      existingCartItem.quantity += quantity;
+      await user.save();
+      return res.status(200).json({ message: 'Product added to cart!', data: user.cart, success: true });
+    }
+
+    user.cart.push({ product: productId, quantity });
     await user.save();
-    res.status(201).json({ message: 'Product added to cart!', cart: user.cart });
+    return res.status(201).json({ message: 'Product added to cart!', data: user.cart, success: true });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong!' });
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
 };
 
 export const getUserCart = async (req, res) => {
-  const { userID } = req.params;
+  const user = req.user;
 
   try {
-    const user = await User.findById(userID);
     const productIDs = user.cart.map((item) => item.product);
     const products = await Product.find({ _id: { $in: productIDs } });
 
@@ -29,9 +51,9 @@ export const getUserCart = async (req, res) => {
       return { product, quantity: cartItem.quantity };
     });
 
-    res.status(200).json({ cart });
+    return res.status(200).json({ data: cart, success: true });
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
 };
 
@@ -77,16 +99,19 @@ export const checkout = async (req, res) => {
 };
 
 export const removeFromCart = async (req, res) => {
-  const { userID, productID } = req.body;
+  const user = req.user;
+
+  const { productId } = req.body;
+
+  if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
+    return res.status(400).json({ message: 'Invalid product!', success: false });
+  }
 
   try {
-    const user = await User.findById(userID);
-    if (!user) return res.status(404).json({ message: 'User not found!' });
+    const cartLength = user.cart.length;
+    user.cart = user.cart.filter((item) => item.product.toString() !== productId);
 
-    const initialCartLength = user.cart.length;
-    user.cart = user.cart.filter((item) => item.product.toString() !== productID);
-
-    if (user.cart.length === initialCartLength) {
+    if (user.cart.length === cartLength) {
       return res.status(404).json({ message: 'Product not found in cart!' });
     }
 
