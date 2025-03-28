@@ -1,64 +1,80 @@
+import mongoose from 'mongoose';
 import Product from '../models/Product.js';
 
+export const getAllProducts = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+
+  const newPage = parseInt(page) < 1 ? 1 : parseInt(page);
+  const newLimit = parseInt(limit) < 1 ? 1 : parseInt(limit);
+
+  try {
+    const allProducts = await Product.find({})
+      .skip((newPage - 1) * newLimit)
+      .limit(newLimit);
+    return res.status(200).json({ data: allProducts, page: newPage, limit: newLimit, success: true });
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
+  }
+};
+
 export const addProduct = async (req, res) => {
-  const { name, description, price, stocks, imageUrl, category } = req.body;
+  const { name, description, price, stocks, image, category } = req.body;
   try {
     const product = await Product.create({
       name,
       description,
       price,
       stocks,
-      imageUrl,
+      image,
       category,
     });
 
-    res.status(201).json({ message: 'Product created successfully', product });
+    return res.status(201).json({ message: 'Product created successfully', data: product, success: true });
   } catch (error) {
-    res.status(500).json({ message: 'Invalid error!' });
-  }
-};
-
-export const getAllProducts = async (req, res) => {
-  try {
-    const allProducts = await Product.find({});
-    res.status(200).json({ products: allProducts });
-  } catch (error) {
-    res.status(500).json({ message: 'Internal server error!' });
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
 };
 
 export const getProduct = async (req, res) => {
   const { id } = req.params;
 
+  if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: 'Invalid product', success: false });
+  }
+
   try {
     const product = await Product.findById(id);
-    res.status(200).json({ product });
+
+    return res.status(200).json({ data: product, success: true });
   } catch (error) {
-    res.status(500).json({ message: 'Invalid product!' });
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
 };
 
 export const modifyProduct = async (req, res) => {
-  const { id, name, description, imageUrl, price, stocks, category } = req.body;
+  const { id } = req.params;
 
+  if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: 'Invalid product', success: false });
+  }
   try {
-    const product = await Product.findByIdAndUpdate(id, {
-      name,
-      description,
-      imageUrl,
-      price,
-      stocks,
-      category,
-    });
+    const productData = req.body;
 
-    res.status(200).json({ message: 'Product updated successfully', product });
+    const product = await Product.findByIdAndUpdate(id, productData, { new: true });
+
+    return res.status(200).json({ message: 'Product updated successfully', data: product, success: true });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong!' });
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
 };
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
+
+  if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: 'Invalid product', success: false });
+  }
+
   try {
     const product = await Product.findById(id);
 
@@ -68,8 +84,8 @@ export const deleteProduct = async (req, res) => {
     }
 
     await Product.findByIdAndDelete(id);
-    res.status(200).json({ message: 'Product deleted successfully' });
+    return res.status(200).json({ message: 'Product deleted successfully', success: true });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong!' });
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
 };
