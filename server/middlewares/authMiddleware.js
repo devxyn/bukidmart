@@ -12,3 +12,19 @@ export const verifyToken = async (req, res, next) => {
 
   next();
 };
+
+export const isAdmin = async (req, res, next) => {
+  if (req.user.role === 'admin') {
+    next();
+  } else {
+    return res.status(401).json({ message: 'Unauthorized!', success: false });
+  }
+};
+
+export const isUser = async (req, res, next) => {
+  if (req.user.role === 'user') {
+    next();
+  } else {
+    return res.status(401).json({ message: 'Unauthorized!', success: false });
+  }
+};
