@@ -5,7 +5,7 @@ const productSchema = new Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   stocks: { type: Number, required: true, default: 0 },
-  imageUrl: { type: String, required: true, default: 'image.png' },
+  image: { type: String, required: true, default: 'image.png' },
   category: {
     type: String,
     enum: ['rice', 'vegetable', 'fruit'],
