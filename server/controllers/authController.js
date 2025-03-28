@@ -1,39 +1,44 @@
 import User from '../models/User.js';
-import bcrpyt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import 'dotenv/config.js';
 
-export const loginController = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.findOne({ email });
 
-    if (!user) res.status(401).json({ message: 'Invalid credentials!' });
+    if (!user) res.status(401).json({ message: 'Invalid credentials!', success: false });
 
-    const isPasswordValid = await bcrpyt.compare(password, user.password);
+    const isMatch = await user.matchPassword(password);
 
-    if (!isPasswordValid) res.status(401).json({ message: 'Invalid credentials!' });
+    if (!isMatch) res.status(401).json({ message: 'Invalid credentials!', success: false });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.status(200).json({ message: 'Logged in successfully!', token, userID: user._id, isAdmin: user.isAdmin });
-  } catch (error) {}
+
+    return res.status(200).json({ message: 'Logged in successfully!', token, success: true });
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
+  }
 };
 
-export const signUpController = async (req, res) => {
-  const { email, password } = req.body;
+export const signUp = async (req, res) => {
+  const { email, password, firstName, lastName } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const userExists = await User.findOne({ email });
 
-    if (user) res.status(400).json({ message: 'Email is already registered!' });
+    if (userExists) return res.status(400).json({ message: 'Email is already registered!', success: false });
 
-    const hashedPassword = await bcrpyt.hash(password, 10);
+    const user = await User.create({ firstName, lastName, email, password });
 
-    const newUser = await User.create({ email, password: hashedPassword });
-
-    res.status(201).json({ message: 'Account registered successfully!', data: newUser });
+    res.status(201).json({ message: 'Account registered successfully!', data: user, success: true });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong!' });
+    res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }
+};
+
+export const me = async (req, res) => {
+  const { user } = req;
+
+  return res.status(200).json({ message: 'User fetched successfully!', data: user, success: true });
 };
