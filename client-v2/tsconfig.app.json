@@ -31,7 +31,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@services/*": ["src/services/*"],
       "@config/*": ["src/config/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@store/*": ["src/store/*"]
     }
   },
   "include": ["src"]
