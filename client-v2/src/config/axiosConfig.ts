@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { store } from '@store/store';
+import { logout } from '@store/slices/userSlice';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
@@ -13,8 +15,8 @@ const axiosInstance = axios.create({
 // Request interceptor for adding auth token, etc.
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Get token from localStorage if it exists
-    const token = localStorage.getItem('authToken');
+    // Get token from Redux store
+    const token = store.getState().user.token;
 
     // If token exists, add it to the request headers
     if (token) {
@@ -38,9 +40,8 @@ axiosInstance.interceptors.response.use(
     if (error.response) {
       // Server responded with a status code outside of 2xx range
       if (error.response.status === 401) {
-        // Handle unauthorized access (e.g., redirect to login)
-        localStorage.removeItem('authToken');
-        // You might want to redirect to login page or dispatch a logout action
+        // Handle unauthorized access by dispatching logout action
+        store.dispatch(logout());
       }
 
       if (error.response.status === 403) {
