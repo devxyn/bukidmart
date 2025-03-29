@@ -7,11 +7,11 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
 
-    if (!user) res.status(401).json({ message: 'Invalid credentials!', success: false });
+    if (!user) return res.status(401).json({ message: 'Invalid credentials!', success: false });
 
     const isMatch = await user.matchPassword(password);
 
-    if (!isMatch) res.status(401).json({ message: 'Invalid credentials!', success: false });
+    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials!', success: false });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
