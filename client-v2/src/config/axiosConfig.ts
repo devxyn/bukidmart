@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { store } from '@store/store';
 import { logout } from '@store/slices/userSlice';
-import { toast } from 'react-toastify';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
@@ -35,12 +34,9 @@ axiosInstance.interceptors.request.use(
 // Response interceptor for handling common errors
 axiosInstance.interceptors.response.use(
   (response) => {
-    toast.success(response.data?.message);
     return response;
   },
   (error) => {
-    // Toast error
-    toast.error(error.response?.data?.message);
     // Handle specific error cases
     if (error.response) {
       // Server responded with a status code outside of 2xx range
