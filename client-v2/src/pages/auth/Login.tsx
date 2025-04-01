@@ -4,12 +4,15 @@ import { login } from '@/store/slices/userSlice';
 import { AppDispatch, RootState } from '@/store/store';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { handleError } from '@/utils/helper';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const token = useSelector((state: RootState) => state.user.token);
   const navigate = useNavigate();
@@ -21,12 +24,16 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const response = await postRequest('/auth/login', formData);
       dispatch(login(response));
+      navigate('/');
     } catch (error) {
-      console.error(error);
+      handleError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -51,6 +58,7 @@ const Login = () => {
               onChange={handleChange}
               value={formData.email}
               required
+              disabled={isLoading}
             />
           </fieldset>
           <fieldset className='fieldset w-full'>
@@ -63,10 +71,11 @@ const Login = () => {
               onChange={handleChange}
               value={formData.password}
               required
+              disabled={isLoading}
             />
           </fieldset>
-          <button className='btn btn-outline btn-accent w-1/2' type='submit'>
-            Login
+          <button className='btn btn-outline btn-accent w-1/2 hover:text-white' type='submit' disabled={isLoading}>
+            {isLoading ? <span className='loading loading-spinner loading-lg'></span> : 'Login'}
           </button>
         </form>
       </div>
