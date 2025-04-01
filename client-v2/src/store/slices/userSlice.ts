@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CartItem {
@@ -28,7 +29,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{ data: User; token: string }>) => {
+    login: (state, action: PayloadAction<any>) => {
       state.user = action.payload.data;
       state.token = action.payload.token;
     },
