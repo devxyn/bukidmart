@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { getRequest } from '@/services/requestService';
-import { setFeaturedProducts } from '@/store/slices/productSlice';
-import { RootState } from '@/store/store';
-import { handleError } from '@/utils/helper';
+import { getRequest } from '@services/requestService';
+import { setFeaturedProducts } from '@store/slices/productSlice';
+import { RootState } from '@store/store';
+import { handleError } from '@utils/helper';
 import ProductCard from '@components/shared/ProductCard';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

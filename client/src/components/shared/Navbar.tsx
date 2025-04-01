@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiOutlineShoppingBag } from 'react-icons/hi2';
-import { RootState } from '@/store/store';
-import { logout } from '@/store/slices/userSlice';
+import { RootState } from '@store/store';
+import { logout } from '@store/slices/userSlice';
 
 const Navbar = () => {
   const token = useSelector((state: RootState) => state.user.token);

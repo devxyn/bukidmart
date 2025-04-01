@@ -1,7 +1,7 @@
-import { postRequest } from '@/services/requestService';
+import { postRequest } from '@services/requestService';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { handleError } from '@/utils/helper';
+import { handleError } from '@utils/helper';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({

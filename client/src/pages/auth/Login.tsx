@@ -4,7 +4,7 @@ import { login } from '@/store/slices/userSlice';
 import { AppDispatch, RootState } from '@/store/store';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { handleError } from '@/utils/helper';
+import { handleError } from '@utils/helper';
 
 const Login = () => {
   const [formData, setFormData] = useState({
