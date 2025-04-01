@@ -25,6 +25,7 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@store': '/src/store',
       '@layout': '/src/layout',
+      '@data': '/src/data',
     },
   },
 });
