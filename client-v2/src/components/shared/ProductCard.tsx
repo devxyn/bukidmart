@@ -29,7 +29,7 @@ const ProductCard = ({ isLoading = false, product }: ProductCardProps) => {
   }
 
   return (
-    <div className='w-80 flex-shrink-0 md:flex-shrink relative'>
+    <div className='w-80 flex-shrink-0 md:flex-shrink relative hover:cursor-pointer'>
       <p className='absolute top-3 right-4 bg-secondary text-white text-center text-xs font-bold tracking-wide px-3 py-2 rounded-xl'>
         {product.category.toUpperCase()}
       </p>
