@@ -12,12 +12,12 @@ interface ProductData {
 }
 
 interface ProductCardProps {
-  isLoading: boolean;
-  product: ProductData;
+  isLoading?: boolean;
+  product: ProductData | null;
 }
 
-const ProductCard = ({ isLoading = false, product }: ProductCardProps) => {
-  if (isLoading) {
+const ProductCard = ({ isLoading = true, product }: ProductCardProps) => {
+  if (isLoading || !product) {
     return (
       <div className='flex w-60 md:w-64 flex-col gap-4'>
         <div className='skeleton h-52 w-full'></div>
