@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import { loginController, signUpController } from '../controllers/authController.js';
+import { signUp, login, me } from '../controllers/authController.js';
+import { verifyToken } from '../middlewares/authMiddleware.js';
 
 const router = new Router();
 
-router.post('/signup', signUpController);
-router.post('/login', loginController);
+router.post('/signup', signUp);
+router.post('/login', login);
+router.get('/me', verifyToken, me);
 
-export { router as authRoutes };
+export default router;

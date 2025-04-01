@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import { addToCart, checkout, getUserCart, removeFromCart } from '../controllers/cartController.js';
+import { verifyToken, isUser } from '../middlewares/authMiddleware.js';
 
 const router = new Router();
 
-router.put('/add', addToCart);
-router.get('/:userID', getUserCart);
-router.post('/checkout', checkout);
-router.post('/remove', removeFromCart);
+router.put('/', verifyToken, isUser, addToCart);
+router.get('/', verifyToken, isUser, getUserCart);
+router.put('/remove', verifyToken, isUser, removeFromCart);
+// router.post('/checkout', verifyToken, checkout);
 
-export { router as cartRoutes };
+export default router;
