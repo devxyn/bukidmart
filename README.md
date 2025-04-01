@@ -1,7 +1,5 @@
 # BukidMart
 
-![BukidMart Banner](./client/public/banner.png)
-
 > **Farm-fresh goodness delivered to your doorstep**
 
 ## 🛒 About BukidMart
