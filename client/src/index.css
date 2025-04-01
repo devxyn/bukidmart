@@ -1,20 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-* {
-  color: #323332;
-}
-
-@layer utilities {
-  /* Hide the arrow buttons in input[type="number"] */
-  .hide-arrows::-webkit-outer-spin-button,
-  .hide-arrows::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  .hide-arrows {
-    -moz-appearance: textfield;
-  }
+@import 'tailwindcss';
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: 'light';
+  default: true;
+  prefersdark: true;
+  --color-primary: #008233;
+  --color-secondary: #43b130;
+  --color-accent: #e8b75c;
+  --color-neutral: #f3fcf7;
 }
