@@ -23,7 +23,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 
-if (process.env.APP_NAME === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/dist')));
 
   app.get('*', (req, res) => {

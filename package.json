@@ -5,19 +5,19 @@
   "main": "index.js",
   "type": "module",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "dev": "nodemon server/server.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client",
-    "start": "node server/server.js"
+    "start": "NODE_ENV=production node server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/devxyn/bukidmart.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "devxyn",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/devxyn/bukidmart/issues"
