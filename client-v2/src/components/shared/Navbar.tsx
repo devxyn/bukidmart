@@ -36,7 +36,7 @@ const Navbar = () => {
               <Link to='/about'>About Us</Link>
             </li>
             <li>
-              <Link to='/products'>Products</Link>
+              <Link to='/shop'>Products</Link>
             </li>
             <li>
               <Link to='/contact'>Contact Us</Link>
@@ -56,7 +56,7 @@ const Navbar = () => {
             <Link to='/about'>About Us</Link>
           </li>
           <li>
-            <Link to='/products'>Products</Link>
+            <Link to='/shop'>Products</Link>
           </li>
           <li>
             <Link to='/contact'>Contact Us</Link>
@@ -67,7 +67,15 @@ const Navbar = () => {
         <Link to={token ? '/cart' : '/auth/login'}>
           <HiOutlineShoppingBag className='text-white mr-2' size={32} />
         </Link>
-        <button onClick={token ? handleLogout : () => {}} className='btn btn-accent text-white w-[6.3rem] shadow-none'>
+        <button
+          onClick={
+            token
+              ? handleLogout
+              : () => {
+                  navigate('/auth/login');
+                }
+          }
+          className='btn btn-accent text-white w-[6.3rem] shadow-none'>
           {token ? 'Logout' : 'Shop Now'}
         </button>
       </div>
