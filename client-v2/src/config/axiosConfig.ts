@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { store } from '@store/store';
 import { logout } from '@store/slices/userSlice';
+import { toast } from 'react-toastify';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
@@ -34,6 +35,7 @@ axiosInstance.interceptors.request.use(
 // Response interceptor for handling common errors
 axiosInstance.interceptors.response.use(
   (response) => {
+    toast.success(response?.data?.message);
     return response;
   },
   (error) => {
