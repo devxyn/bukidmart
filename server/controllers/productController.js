@@ -2,13 +2,18 @@ import mongoose from 'mongoose';
 import Product from '../models/Product.js';
 
 export const getAllProducts = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10, featured } = req.query;
 
   const newPage = parseInt(page) < 1 ? 1 : parseInt(page);
   const newLimit = parseInt(limit) < 1 ? 1 : parseInt(limit);
 
   try {
-    const allProducts = await Product.find({})
+    const query = {};
+    if (featured === 'true') {
+      query.isFeatured = true;
+    }
+
+    const allProducts = await Product.find(query)
       .skip((newPage - 1) * newLimit)
       .limit(newLimit);
     return res.status(200).json({ data: allProducts, page: newPage, limit: newLimit, success: true });
@@ -18,7 +23,7 @@ export const getAllProducts = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const { name, description, price, stocks, image, category } = req.body;
+  const { name, description, price, stocks, image, category, isFeatured } = req.body;
   try {
     const product = await Product.create({
       name,
@@ -27,6 +32,7 @@ export const addProduct = async (req, res) => {
       stocks,
       image,
       category,
+      isFeatured,
     });
 
     return res.status(201).json({ message: 'Product created successfully', data: product, success: true });
