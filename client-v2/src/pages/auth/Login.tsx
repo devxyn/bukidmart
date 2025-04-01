@@ -3,7 +3,7 @@ import { postRequest } from '@/services/requestService';
 import { login } from '@/store/slices/userSlice';
 import { AppDispatch, RootState } from '@/store/store';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { handleError } from '@/utils/helper';
 
 const Login = () => {
@@ -44,7 +44,7 @@ const Login = () => {
   }, [token, navigate]);
 
   return (
-    <div className='flex h-full w-full items-center justify-center'>
+    <div className='flex h-[calc(100vh-7.3rem)] w-full items-center justify-center'>
       <div className='w-1/2 flex flex-col items-center gap-4'>
         <h1 className='text-2xl font-bold'>Login form</h1>
         <form onSubmit={handleSubmit} className='w-full flex flex-col items-center gap-4'>
@@ -78,6 +78,12 @@ const Login = () => {
             {isLoading ? <span className='loading loading-spinner loading-lg'></span> : 'Login'}
           </button>
         </form>
+        <p className='text-sm'>
+          Don't have an account?{' '}
+          <Link className='text-secondary font-semibold' to='/auth/signup'>
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );
