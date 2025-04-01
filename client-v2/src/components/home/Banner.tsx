@@ -9,7 +9,7 @@ const Banner = () => {
           <span className='text-secondary font-bold'>Farm-fresh</span> goodness delivered to your doorstep
         </h1>
         <div className='flex justify-center lg:justify-start gap-4'>
-          <Link to='/products' className='btn btn-accent w-[10rem] h-[3rem] text-white text-xl'>
+          <Link to='/shop' className='btn btn-accent w-[10rem] h-[3rem] text-white text-xl'>
             Shop now
           </Link>
           <button className='btn btn-outline btn-primary w-[10rem] h-[3rem] text-xl'>Learn more</button>
