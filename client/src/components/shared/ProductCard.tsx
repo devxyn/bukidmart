@@ -13,17 +13,16 @@ interface ProductData {
 
 interface ProductCardProps {
   isLoading?: boolean;
-  product: ProductData | null;
+  product?: ProductData | null;
 }
 
-const ProductCard = ({ isLoading = true, product }: ProductCardProps) => {
+const ProductCard = ({ isLoading = true, product = null }: ProductCardProps) => {
   if (isLoading || !product) {
     return (
-      <div className='flex w-60 md:w-64 flex-col gap-4'>
-        <div className='skeleton h-52 w-full'></div>
-        <div className='skeleton h-4 w-3/4'></div>
-        <div className='skeleton h-4 w-1/2'></div>
-        <div className='skeleton h-4 w-1/2'></div>
+      <div className='flex w-80 flex-col gap-2'>
+        <div className='skeleton h-[19rem] w-full'></div>
+        <div className='skeleton h-5 w-3/4'></div>
+        <div className='skeleton h-4 w-1/5'></div>
       </div>
     );
   }
