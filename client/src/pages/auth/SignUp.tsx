@@ -33,11 +33,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className='flex min-h-screen w-full items-center justify-center'>
+    <div className='flex flex-1 w-full items-center justify-center'>
       <div className='w-full md:w-1/2 mx-5 flex flex-col items-center gap-4'>
         <h1 className='text-2xl font-bold'>Sign Up Form</h1>
         <form onSubmit={handleSubmit} className='w-full flex flex-col items-center gap-4'>
-          <div className='flex gap-4 w-full'>
+          <div className='flex flex-col md:flex-row gap-4 w-full'>
             <fieldset className='fieldset w-full'>
               <legend className='fieldset-label'>First Name</legend>
               <input

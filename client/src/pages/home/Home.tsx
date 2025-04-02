@@ -5,7 +5,7 @@ import Testimonials from '@components/home/Testimonials';
 
 const Home = () => {
   return (
-    <div>
+    <div className='h-full'>
       <Banner />
       <Featured />
       <Statement />
