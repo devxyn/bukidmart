@@ -6,6 +6,7 @@ import Login from '@pages/auth/Login';
 import SignUp from '@pages/auth/SignUp';
 import ComingSoon from '@pages/shared/ComingSoon';
 import NotFound from '@pages/shared/NotFound';
+import Shop from '@pages/shop/Shop';
 
 const App = () => {
   return (
@@ -17,7 +18,7 @@ const App = () => {
           <Route path='signup' element={<SignUp />} />
         </Route>
         <Route path='/about' element={<ComingSoon />} />
-        <Route path='/shop' element={<ComingSoon />} />
+        <Route path='/shop' element={<Shop />} />
         <Route path='/contact' element={<ComingSoon />} />
         <Route path='*' element={<NotFound />} />
       </Route>
