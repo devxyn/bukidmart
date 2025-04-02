@@ -13,10 +13,12 @@ export const getAllProducts = async (req, res) => {
       query.isFeatured = true;
     }
 
+    const total = await Product.countDocuments(query);
     const allProducts = await Product.find(query)
       .skip((newPage - 1) * newLimit)
       .limit(newLimit);
-    return res.status(200).json({ data: allProducts, page: newPage, limit: newLimit, success: true });
+
+    return res.status(200).json({ data: allProducts, page: newPage, limit: newLimit, total, success: true });
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong!', error: error.message, success: false });
   }

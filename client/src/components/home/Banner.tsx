@@ -8,6 +8,10 @@ const Banner = () => {
         <h1 className='text-4xl lg:text-5xl font-semibold tracking-wide lg:tracking-widest leading-tight mb-10'>
           <span className='text-secondary font-bold'>Farm-fresh</span> goodness delivered to your doorstep
         </h1>
+        <p className='text-lg lg:text-xl text-gray-600 mb-8 max-w-2xl'>
+          Discover our selection of fresh, organic produce and local farm products. Quality you can trust, delivered
+          right to you.
+        </p>
         <div className='flex justify-center lg:justify-start gap-4'>
           <Link to='/shop' className='btn btn-accent w-[10rem] h-[3rem] text-white text-xl'>
             Shop now
