@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
+import { createServer } from '@vercel/node';
 
 import connectDB from './config/database.js';
 import authRoutes from './routes/authRoutes.js';
@@ -35,3 +36,5 @@ app.listen(port, () => {
   connectDB();
   console.log(`Server is running on port ${port}.`);
 });
+
+export default createServer(app);
