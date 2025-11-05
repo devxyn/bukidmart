@@ -1,9 +1,10 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "server/server.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "server/server.js" }
-    ]
-  }
+  "version": 2,
+  "buildCommand": "npm run build",
+  "builds": [
+    { "src": "server/server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "server/server.js" }
+  ]
+}
