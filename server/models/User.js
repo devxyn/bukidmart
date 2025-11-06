@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import brcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const { Schema, model } = mongoose;
 
@@ -11,7 +11,7 @@ const cartItemSchema = new Schema({
 const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true, trim: true },
-    password: { type: String, required: true, trim: true },
+    password: { type: String, required: true, trim: true, minlength: 8 },
     firstName: { type: String, default: '' },
     lastName: { type: String, default: '' },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
@@ -23,13 +23,13 @@ const userSchema = new Schema(
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
-  const salt = await brcrypt.genSalt(10);
-  this.password = await brcrypt.hash(this.password, salt);
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await brcrypt.compare(enteredPassword, this.password);
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 userSchema.set('toJSON', {
