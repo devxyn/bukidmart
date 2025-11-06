@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import vine from '@vinejs/vine';
-import { validatorService } from '../serveces/validatorService.js';
+import { validatorService } from '../services/validatorService.js';
 
 const loginSchema = vine.object({
   email: vine.string().email(),
