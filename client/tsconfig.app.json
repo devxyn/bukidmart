@@ -23,7 +23,7 @@
     "noUncheckedSideEffectImports": true,
 
     // Add this line to silence the deprecation warning
-    // "ignoreDeprecations": "6.0",
+    "ignoreDeprecations": "6.0",
     
     // Keep baseUrl for now but plan to migrate
     "baseUrl": ".",
