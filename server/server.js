@@ -10,6 +10,8 @@ import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 
+dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -28,7 +30,6 @@ vine.convertEmptyStringsToNull = true;
 // Add multer middleware to handle multipart/form-data
 app.use(upload.any());
 
-dotenv.config();
 app.use(cors());
 
 app.use(express.json());
@@ -63,7 +64,11 @@ if (process.env.NODE_ENV === 'production') {
 
 // Add error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err.stack);
+  } else {
+    console.error(err.message);
+  }
   res.status(500).json({ message: 'Something went wrong. Please try again later.', success: false });
 });
 
